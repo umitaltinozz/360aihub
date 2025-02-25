@@ -131,24 +131,38 @@ const Index = () => {
             <div className="flex justify-between items-center mb-10">
               <div>
                 <h2 className="text-3xl font-bold mb-2">Son AI Haberleri</h2>
-                <p className="text-white/
+                <p className="text-white/70 text-sm">
+                  Yapay zeka dünyasının en güncel haberleri
+                </p>
+              </div>
+              <Link to="/ai-news">
+                <Button variant="ghost" className="text-aihub-blue hover:bg-aihub-blue/10">
+                  <span className="mr-2">Tümünü Gör</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+              {featuredNews.map((news) => (
+                <NewsCard 
+                  key={news.id}
+                  id={news.id}
+                  title={news.title}
+                  excerpt={news.excerpt}
+                  category={news.category}
+                  imageUrl={news.imageUrl}
+                  publishedAt={news.publishedAt}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
 
-Sonraki adımlar neler?
-- **İnce ayar yap ve özelleştir**: Promtlar veya görsel düzenlemeler aracılığıyla tasarımı, animasyonları ve düzenleri ince ayar yapın.
-- **Promt kullanımında uzmanlaş**: Daha iyi sonuçlar için açık, ayrıntılı ve yinelemeli komutlar kullanın.
-- **Backend ile genişlet**: Giriş yapma, veri depolama veya gelişmiş yapay zeka özellikleri eklemek için Supabase'i bağlayın.
-- **GitHub senkronizasyonu**: Düzenlemelerin iki yönlü senkronizasyonu için projenizin kodunu GitHub'a aktarın.
-- **Kolayca hata ayıklama**: Sorunları hızlı bir şekilde gidermek için deneysel “sohbet modu”nu etkinleştirin.
-- **Proje bilgisini ekle**: Bu projedeki her düzenlemeye dahil etmek istediğiniz önemli bağlamı veya özel talimatları ayarlayın.
-
-<lov-actions>
-<lov-knowledge>
-</lov-actions>
-
-<lov-actions>
-<lov-message-prompt message="Supabase hakkında daha fazla bilgi edin">Supabase'i keşfedin</lov-message-prompt>
-</lov-actions>
-
-<lov-actions>
-<lov-link url="https://docs.lovable.dev/">Belgelere göz atın</lov-link>
-</lov-actions>
+export default Index;
