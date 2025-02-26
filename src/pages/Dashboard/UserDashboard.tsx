@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import {
   Bell,
   CreditCard,
@@ -18,11 +18,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
-import Navbar from "@/components/Navbar";
+import CustomNavbar from "@/components/CustomNavbar";
 
 const UserDashboard = () => {
   const { toast } = useToast();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const location = useLocation();
   
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -40,7 +41,7 @@ const UserDashboard = () => {
   
   return (
     <div className="min-h-screen bg-aihub-dark flex flex-col">
-      <Navbar />
+      <CustomNavbar />
       
       <div className="flex flex-1 pt-16">
         {/* Sidebar - Mobile View */}
@@ -143,7 +144,7 @@ const UserDashboard = () => {
             <Outlet />
             
             {/* Default Dashboard Content (will be replaced by Outlet when routes are active) */}
-            <DashboardHome />
+            {location.pathname === "/dashboard" && <DashboardHome />}
           </div>
         </div>
       </div>
@@ -153,10 +154,12 @@ const UserDashboard = () => {
 
 // Sidebar Content Component
 const SidebarContent = () => {
+  const location = useLocation();
+  
   const links = [
     { icon: Home, text: "Ana Sayfa", to: "/dashboard" },
     { icon: User, text: "Profil Ayarları", to: "/dashboard/profile" },
-    { icon: Star, text: "Abonelik", to: "/dashboard/subscription" },
+    { icon: Star, text: "Abonelik", to: "/subscription/plans" },
     { icon: CreditCard, text: "Ödeme Geçmişi", to: "/dashboard/payments" },
     { icon: Key, text: "API Anahtarları", to: "/dashboard/api-keys" },
     { icon: BarChart, text: "Kullanım İstatistikleri", to: "/dashboard/usage" },
@@ -170,9 +173,17 @@ const SidebarContent = () => {
         <Link
           key={index}
           to={link.to}
-          className="flex items-center px-2 py-2 text-sm font-medium rounded-md text-white/70 hover:text-white hover:bg-white/5 group"
+          className={`flex items-center px-2 py-2 text-sm font-medium rounded-md group
+            ${location.pathname === link.to 
+              ? "bg-white/10 text-white" 
+              : "text-white/70 hover:text-white hover:bg-white/5"
+            }`}
         >
-          <link.icon className="mr-3 h-5 w-5 text-white/60 group-hover:text-aihub-blue" />
+          <link.icon className={`mr-3 h-5 w-5 ${
+            location.pathname === link.to 
+              ? "text-aihub-blue" 
+              : "text-white/60 group-hover:text-aihub-blue"
+          }`} />
           {link.text}
         </Link>
       ))}
@@ -186,9 +197,11 @@ const DashboardHome = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-center justify-between">
         <h1 className="text-2xl font-bold mb-4 sm:mb-0">Kullanıcı Paneli</h1>
-        <Button className="bg-gradient-to-r from-aihub-blue to-aihub-purple text-white hover:opacity-90">
-          Yeni API Anahtarı
-        </Button>
+        <Link to="/dashboard/api-keys">
+          <Button className="bg-gradient-to-r from-aihub-blue to-aihub-purple text-white hover:opacity-90">
+            Yeni API Anahtarı
+          </Button>
+        </Link>
       </div>
       
       {/* Subscription Status */}
@@ -213,9 +226,11 @@ const DashboardHome = () => {
               <span className="text-sm text-white/60">18 gün kaldı</span>
             </div>
             <div className="mt-4 space-x-2">
-              <Button variant="outline" className="border-white/10 hover:bg-white/5">
-                Planı Değiştir
-              </Button>
+              <Link to="/subscription/plans">
+                <Button variant="outline" className="border-white/10 hover:bg-white/5">
+                  Planı Değiştir
+                </Button>
+              </Link>
               <Button variant="ghost" className="hover:bg-white/5 text-red-400 hover:text-red-300">
                 İptal Et
               </Button>

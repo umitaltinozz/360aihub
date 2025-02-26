@@ -1,12 +1,12 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, Globe, BarChart, ShoppingCart } from "lucide-react";
+import { ArrowRight, BookOpen, Globe, BarChart, ShoppingCart, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Hero from "@/components/Hero";
 import QuickAccessCard from "@/components/QuickAccessCard";
 import NewsCard from "@/components/NewsCard";
-import Navbar from "@/components/Navbar";
+import CustomNavbar from "@/components/CustomNavbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 
@@ -45,24 +45,28 @@ const quickAccessData = [
     description: "Dünya genelinde yapay zeka alanındaki son gelişmeler ve haberler",
     icon: Globe,
     bgColor: "bg-aihub-blue",
+    link: "/ai-news"
   },
   {
     title: "AI Modelleri",
     description: "En yeni ve popüler yapay zeka modellerine hızlı erişim",
     icon: BarChart,
     bgColor: "bg-aihub-purple",
+    link: "/ai-models"
   },
   {
     title: "Eğitimler",
     description: "Ücretsiz ve premium yapay zeka kursları ve eğitim kaynakları",
     icon: BookOpen,
     bgColor: "bg-green-500",
+    link: "/training"
   },
   {
     title: "Marketplace",
     description: "AI model ve promptlarını satın alabileceğiniz ve satabileceğiniz platform",
     icon: ShoppingCart,
     bgColor: "bg-amber-500",
+    link: "/marketplace"
   },
 ];
 
@@ -95,7 +99,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-aihub-dark">
-      <Navbar />
+      <CustomNavbar />
       
       <main className="flex-grow pt-16">
         {/* Hero Section */}
@@ -113,14 +117,40 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in">
               {quickAccessData.map((card, index) => (
-                <QuickAccessCard 
-                  key={index}
-                  title={card.title}
-                  description={card.description}
-                  icon={card.icon}
-                  bgColor={card.bgColor}
-                />
+                <Link to={card.link} key={index} className="block">
+                  <QuickAccessCard 
+                    title={card.title}
+                    description={card.description}
+                    icon={card.icon}
+                    bgColor={card.bgColor}
+                  />
+                </Link>
               ))}
+            </div>
+
+            {/* Access to Dashboard & Auth Buttons */}
+            <div className="flex flex-col md:flex-row justify-center items-center mt-12 gap-4">
+              <Link to="/dashboard">
+                <Button variant="outline" className="w-full md:w-auto flex items-center gap-2 border-white/20 hover:bg-white/5">
+                  <UserCircle className="h-5 w-5" />
+                  Kullanıcı Paneli
+                </Button>
+              </Link>
+              <Link to="/auth/signin">
+                <Button variant="outline" className="w-full md:w-auto border-white/20 hover:bg-white/5">
+                  Giriş Yap
+                </Button>
+              </Link>
+              <Link to="/auth/signup">
+                <Button className="w-full md:w-auto bg-gradient-to-r from-aihub-blue to-aihub-purple hover:opacity-90">
+                  Ücretsiz Kaydol
+                </Button>
+              </Link>
+              <Link to="/subscription/pricing">
+                <Button variant="outline" className="w-full md:w-auto border-aihub-blue/30 text-aihub-blue hover:bg-aihub-blue/10">
+                  Fiyatlandırma Planları
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -145,15 +175,16 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
               {featuredNews.map((news) => (
-                <NewsCard 
-                  key={news.id}
-                  id={news.id}
-                  title={news.title}
-                  excerpt={news.excerpt}
-                  category={news.category}
-                  imageUrl={news.imageUrl}
-                  publishedAt={news.publishedAt}
-                />
+                <Link to={`/news/${news.id}`} key={news.id}>
+                  <NewsCard 
+                    id={news.id}
+                    title={news.title}
+                    excerpt={news.excerpt}
+                    category={news.category}
+                    imageUrl={news.imageUrl}
+                    publishedAt={news.publishedAt}
+                  />
+                </Link>
               ))}
             </div>
           </div>
