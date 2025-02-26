@@ -74,6 +74,21 @@ const PaymentPage = () => {
     }, 2000);
   };
   
+  // Handle PayPal button click
+  const handlePayPalSubmit = () => {
+    setLoading(true);
+    
+    // Simulate PayPal payment processing
+    setTimeout(() => {
+      setLoading(false);
+      toast({
+        title: "PayPal Ödeme Başarılı",
+        description: "Aboneliğiniz başarıyla etkinleştirildi.",
+      });
+      navigate("/dashboard");
+    }, 2000);
+  };
+  
   return (
     <div className="min-h-screen bg-aihub-dark py-12">
       <div className="container mx-auto max-w-6xl px-4">
@@ -241,7 +256,7 @@ const PaymentPage = () => {
                     </svg>
                     <p className="mb-6 text-white/60">PayPal ile güvenli bir şekilde ödeme yapın</p>
                     <Button
-                      onClick={handleSubmit}
+                      onClick={handlePayPalSubmit}
                       disabled={loading}
                       className={cn(
                         "py-6 px-8 bg-[#0070ba] hover:bg-[#003087] text-white",
