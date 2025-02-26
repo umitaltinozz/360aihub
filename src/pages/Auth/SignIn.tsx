@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Mail, Lock, GitHub, ChevronRight } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, Github, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -230,7 +230,7 @@ const SignIn = () => {
               className="bg-white/5 hover:bg-white/10 border border-white/10"
               variant="outline"
             >
-              <GitHub className="h-5 w-5 mr-2" />
+              <Github className="h-5 w-5 mr-2" />
               GitHub ile Giriş
             </Button>
           </div>
