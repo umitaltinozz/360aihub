@@ -246,4 +246,413 @@ const Marketplace = () => {
   };
 
   const toggleFilters = () => {
-    setShowFilters(!showFil
+    setShowFilters(!showFilters);
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+  };
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+  };
+
+  const handleSortChange = (sort: string) => {
+    setSortBy(sort);
+    toast({
+      title: "Sıralama değiştirildi",
+      description: sort === "popular" 
+        ? "En popüler ürünler gösteriliyor" 
+        : sort === "newest" 
+          ? "En yeni ürünler gösteriliyor" 
+          : sort === "price-low" 
+            ? "En düşük fiyattan yükseğe sıralanıyor" 
+            : "En yüksek fiyattan düşüğe sıralanıyor",
+    });
+  };
+
+  const handleSaveItem = (itemId: string) => {
+    if (savedItems.includes(itemId)) {
+      setSavedItems(savedItems.filter(id => id !== itemId));
+      toast({
+        title: "Kaydedilenlerden Kaldırıldı",
+        description: "Ürün kaydedilenler listenizden kaldırıldı.",
+      });
+    } else {
+      setSavedItems([...savedItems, itemId]);
+      toast({
+        title: "Kaydedilenlere Eklendi",
+        description: "Ürün kaydedilenler listenize eklendi.",
+      });
+    }
+  };
+
+  const handleBuyItem = (item: any) => {
+    toast({
+      title: item.price === 0 ? "İndiriliyor" : "Satın Alma İşlemi",
+      description: item.price === 0 
+        ? "Ürün indiriliyor, lütfen bekleyin..." 
+        : `${item.name} için satın alma işleminiz başlatılıyor.`,
+    });
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-aihub-dark">
+        <div className="text-3xl font-bold text-gradient animate-pulse">Marketplace Yükleniyor...</div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-aihub-dark">
+      <Navbar />
+      
+      <main className="flex-grow pt-16">
+        {/* Header Section */}
+        <div className="bg-gradient-to-b from-amber-500/20 via-aihub-dark to-aihub-dark py-16">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-8">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">AI Marketplace</h1>
+              <p className="text-white/70 max-w-3xl mx-auto">
+                En iyi AI modellerini ve prompt'larını keşfedin, satın alın veya kendi ürünlerinizi satışa sunun.
+              </p>
+            </div>
+            
+            <div className="flex flex-col md:flex-row gap-4 max-w-3xl mx-auto">
+              <div className="relative flex-grow">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 h-5 w-5" />
+                <Input
+                  type="text"
+                  placeholder="Model ya da prompt ara..."
+                  className="pl-10 bg-white/5 border-white/10 focus:border-amber-500 focus:ring-amber-500/50"
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                />
+              </div>
+              <Button 
+                variant="outline" 
+                className="border-white/10 hover:bg-white/5"
+                onClick={toggleFilters}
+              >
+                <Filter className="h-4 w-4 mr-2" />
+                Filtreler
+              </Button>
+            </div>
+            
+            {showFilters && (
+              <Card className="mt-4 p-4 max-w-3xl mx-auto bg-white/5 border-white/10 animate-scale-in">
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-sm font-medium mb-2">Sıralama</h3>
+                    <div className="flex flex-wrap gap-2">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className={sortBy === "popular" 
+                          ? "bg-amber-500/20 text-amber-400 hover:bg-amber-500/30" 
+                          : "bg-white/5 hover:bg-white/10 text-white/70"}
+                        onClick={() => handleSortChange("popular")}
+                      >
+                        <TrendingUp className="h-4 w-4 mr-2" />
+                        En Popüler
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className={sortBy === "newest" 
+                          ? "bg-amber-500/20 text-amber-400 hover:bg-amber-500/30" 
+                          : "bg-white/5 hover:bg-white/10 text-white/70"}
+                        onClick={() => handleSortChange("newest")}
+                      >
+                        <Clock className="h-4 w-4 mr-2" />
+                        En Yeni
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className={sortBy === "price-low" 
+                          ? "bg-amber-500/20 text-amber-400 hover:bg-amber-500/30" 
+                          : "bg-white/5 hover:bg-white/10 text-white/70"}
+                        onClick={() => handleSortChange("price-low")}
+                      >
+                        <DollarSign className="h-4 w-4 mr-2" />
+                        Fiyat: Düşük → Yüksek
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className={sortBy === "price-high" 
+                          ? "bg-amber-500/20 text-amber-400 hover:bg-amber-500/30" 
+                          : "bg-white/5 hover:bg-white/10 text-white/70"}
+                        onClick={() => handleSortChange("price-high")}
+                      >
+                        <DollarSign className="h-4 w-4 mr-2" />
+                        Fiyat: Yüksek → Düşük
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-sm font-medium mb-2">Kategori</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {categories.map((category) => (
+                        <Button
+                          key={category}
+                          size="sm"
+                          variant="ghost"
+                          className={activeCategory === category 
+                            ? "bg-amber-500/20 text-amber-400 hover:bg-amber-500/30" 
+                            : "bg-white/5 hover:bg-white/10 text-white/70"}
+                          onClick={() => handleCategoryChange(category)}
+                        >
+                          {category}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex justify-end mt-4">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setActiveCategory("Tümü");
+                      setSortBy("popular");
+                      setSearchTerm("");
+                      setActiveTab("all");
+                    }}
+                    className="text-white/70 hover:text-white"
+                  >
+                    Filtreleri Temizle
+                  </Button>
+                </div>
+              </Card>
+            )}
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="pt-8 px-6">
+          <div className="max-w-7xl mx-auto">
+            <Tabs 
+              defaultValue="all" 
+              value={activeTab} 
+              className="w-full"
+              onValueChange={handleTabChange}
+            >
+              <TabsList className="grid grid-cols-4 mb-8">
+                <TabsTrigger 
+                  value="all"
+                  className="data-[state=active]:bg-amber-500 data-[state=active]:text-white"
+                >
+                  Tümü
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="models"
+                  className="data-[state=active]:bg-amber-500 data-[state=active]:text-white"
+                >
+                  AI Modelleri
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="prompts"
+                  className="data-[state=active]:bg-amber-500 data-[state=active]:text-white"
+                >
+                  Promptlar
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="free"
+                  className="data-[state=active]:bg-amber-500 data-[state=active]:text-white"
+                >
+                  <Gift className="h-4 w-4 mr-2" />
+                  Ücretsiz
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+        </div>
+
+        {/* Items Grid */}
+        <section className="section-padding pt-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-2xl font-bold">
+                {activeTab === "models" 
+                  ? "AI Modelleri" 
+                  : activeTab === "prompts" 
+                    ? "Promptlar" 
+                    : activeTab === "free" 
+                      ? "Ücretsiz Ürünler" 
+                      : "Tüm Ürünler"} 
+                <span className="text-white/50">({items.length})</span>
+              </h2>
+            </div>
+            
+            {items.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {items.map((item) => (
+                  <Card key={item.id} className="glass card-hover overflow-hidden flex flex-col">
+                    <div className="relative h-52 overflow-hidden">
+                      <img 
+                        src={item.imageUrl} 
+                        alt={item.name}
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+                      />
+                      <div className="absolute top-0 left-0 right-0 flex justify-between items-start p-3">
+                        <Badge className={`${item.type === "model" ? "bg-aihub-blue" : "bg-aihub-purple"} text-white`}>
+                          {item.type === "model" ? "Model" : "Prompt"}
+                        </Badge>
+                        
+                        {item.featured && (
+                          <Badge className="bg-amber-500 text-white">
+                            Öne Çıkan
+                          </Badge>
+                        )}
+                      </div>
+                      
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="absolute top-3 right-3 h-8 w-8 rounded-full p-0 bg-black/30 hover:bg-black/50 text-white"
+                        onClick={() => handleSaveItem(item.id)}
+                      >
+                        <Bookmark className={`h-4 w-4 ${savedItems.includes(item.id) ? "fill-amber-500 text-amber-500" : ""}`} />
+                      </Button>
+                    </div>
+                    
+                    <CardHeader className="pb-2">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="text-xl font-medium mb-1">{item.name}</h3>
+                          <p className="text-sm text-white/70">Geliştirici: {item.creator}</p>
+                        </div>
+                        <div className="flex items-center">
+                          <Star className="h-4 w-4 text-yellow-400 fill-yellow-400 mr-1" />
+                          <span className="font-medium">{item.rating}</span>
+                          <span className="text-xs text-white/50 ml-1">({item.totalReviews})</span>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    
+                    <CardContent className="flex-grow">
+                      <p className="text-sm text-white/80 mb-4 line-clamp-3">{item.description}</p>
+                      
+                      <div className="flex items-center text-sm text-white/70">
+                        <Download className="h-4 w-4 mr-1" />
+                        <span>{item.downloads} indirme</span>
+                      </div>
+                    </CardContent>
+                    
+                    <CardFooter className="pt-0">
+                      <div className="flex w-full justify-between items-center">
+                        <div className="text-lg font-bold">
+                          {item.price === 0 ? (
+                            <span className="text-green-400">Ücretsiz</span>
+                          ) : (
+                            <span>{item.price} ₺</span>
+                          )}
+                        </div>
+                        
+                        <Button 
+                          className="bg-amber-500 hover:bg-amber-600 text-white"
+                          onClick={() => handleBuyItem(item)}
+                        >
+                          {item.price === 0 ? (
+                            <span className="flex items-center">
+                              <Download className="h-4 w-4 mr-2" />
+                              İndir
+                            </span>
+                          ) : (
+                            <span className="flex items-center">
+                              <ShoppingCart className="h-4 w-4 mr-2" />
+                              Satın Al
+                            </span>
+                          )}
+                        </Button>
+                      </div>
+                    </CardFooter>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-xl text-white/70 mb-4">Arama kriterlerinize uygun ürün bulunamadı.</p>
+                <Button 
+                  variant="outline" 
+                  className="border-white/10 hover:bg-white/5"
+                  onClick={() => {
+                    setSearchTerm("");
+                    setActiveCategory("Tümü");
+                    setActiveTab("all");
+                    setSortBy("popular");
+                  }}
+                >
+                  Filtreleri Temizle
+                </Button>
+              </div>
+            )}
+          </div>
+        </section>
+        
+        {/* Sell Your Own */}
+        <section className="py-16 px-6 bg-gradient-to-b from-amber-500/5 to-aihub-dark">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">
+              Kendi AI Ürünlerinizi Satışa Sunun
+            </h2>
+            <p className="text-white/70 max-w-3xl mx-auto mb-8">
+              Geliştirdiğiniz AI modellerini veya oluşturduğunuz premium promptları AIHUB360 Marketplace'de satışa sunarak gelir elde edin.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              <Card className="bg-white/5 border-white/10 text-center py-6 px-4">
+                <DollarSign className="h-10 w-10 mx-auto text-amber-500 mb-4" />
+                <CardHeader className="pb-2">
+                  <h3 className="text-xl font-medium">Kazanç Sağlayın</h3>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-white/70">
+                    Ürünleriniz için belirlediğiniz fiyatlandırma ile düzenli gelir elde edin.
+                  </p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white/5 border-white/10 text-center py-6 px-4">
+                <Tags className="h-10 w-10 mx-auto text-amber-500 mb-4" />
+                <CardHeader className="pb-2">
+                  <h3 className="text-xl font-medium">Geniş Kitleye Ulaşın</h3>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-white/70">
+                    AI topluluğuna ve binlerce potansiyel müşteriye ulaşma imkanı elde edin.
+                  </p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white/5 border-white/10 text-center py-6 px-4">
+                <ShoppingCart className="h-10 w-10 mx-auto text-amber-500 mb-4" />
+                <CardHeader className="pb-2">
+                  <h3 className="text-xl font-medium">Kolay Satış</h3>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-white/70">
+                    Ödeme işlemleri ve satış sonrası destek hizmetlerini biz yönetiyoruz.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <Button className="bg-amber-500 hover:bg-amber-600 text-white px-8 py-6 text-lg">
+              Satıcı Olmak İstiyorum
+            </Button>
+          </div>
+        </section>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default Marketplace;
