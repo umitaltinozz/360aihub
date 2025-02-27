@@ -1,5 +1,6 @@
 
 import { Route, Routes } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Ana Sayfalar
 import Index from "@/pages/Index";
@@ -34,7 +35,7 @@ import "./App.css";
 
 function App() {
   return (
-    <>
+    <ErrorBoundary>
       <Routes>
         {/* Ana Sayfalar */}
         <Route path="/" element={<Index />} />
@@ -69,7 +70,7 @@ function App() {
       </Routes>
       
       <Toaster />
-    </>
+    </ErrorBoundary>
   );
 }
 
