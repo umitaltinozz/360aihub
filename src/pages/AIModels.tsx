@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Search, Filter, SlidersHorizontal, Zap, ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Navbar from "@/components/Navbar";
+import CustomNavbar from "@/components/CustomNavbar";
 import Footer from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -215,7 +215,7 @@ const AIModels = () => {
   }, []);
 
   const handleModelSelect = (modelId: string) => {
-    navigate(`/ai-models/${modelId}`);
+    navigate(`/model/${modelId}`);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -263,23 +263,26 @@ const AIModels = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="text-3xl font-bold text-white animate-pulse">AI Modelleri Yükleniyor...</div>
+      <div className="loading-container">
+        <div className="loading-animation">
+          <div className="loading-spinner"></div>
+          <div className="loading-text">AI Modelleri Yükleniyor...</div>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-900">
-      <Navbar />
+      <CustomNavbar />
       
       <main className="flex-grow pt-16">
         {/* Header Section */}
         <div className="bg-gradient-to-b from-indigo-900/20 via-gray-900 to-gray-900 py-16">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">AI Modelleri & Teknolojileri</h1>
-              <p className="text-white/70 max-w-3xl mx-auto">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 page-heading">AI Modelleri & Teknolojileri</h1>
+              <p className="text-white/90 high-contrast-text max-w-3xl mx-auto">
                 En son yapay zeka modellerini keşfedin, karşılaştırın ve test edin. Hangi AI modelinin ihtiyaçlarınıza en uygun olduğunu öğrenin.
               </p>
             </div>
@@ -326,7 +329,7 @@ const AIModels = () => {
               <Card className="mt-4 p-4 max-w-3xl mx-auto bg-white/5 border-white/10 animate-in fade-in-0 zoom-in-95">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <h3 className="text-sm font-medium mb-2">Kategori</h3>
+                    <h3 className="text-sm font-medium mb-2 text-white high-contrast-text">Kategori</h3>
                     <div className="flex flex-wrap gap-2">
                       {categories.map((category) => (
                         <Button
@@ -345,7 +348,7 @@ const AIModels = () => {
                   </div>
                   
                   <div>
-                    <h3 className="text-sm font-medium mb-2">Model Tipi</h3>
+                    <h3 className="text-sm font-medium mb-2 text-white high-contrast-text">Model Tipi</h3>
                     <div className="flex flex-wrap gap-2">
                       {types.map((type) => (
                         <Button
@@ -364,7 +367,7 @@ const AIModels = () => {
                   </div>
                   
                   <div>
-                    <h3 className="text-sm font-medium mb-2">Şirket</h3>
+                    <h3 className="text-sm font-medium mb-2 text-white high-contrast-text">Şirket</h3>
                     <div className="flex flex-wrap gap-2">
                       {companies.map((company) => (
                         <Button
@@ -392,7 +395,7 @@ const AIModels = () => {
                       checked={showFreeOnly}
                       onChange={() => setShowFreeOnly(!showFreeOnly)}
                     />
-                    <label htmlFor="free-only" className="text-sm">Sadece ücretsiz modelleri göster</label>
+                    <label htmlFor="free-only" className="text-sm text-white high-contrast-text">Sadece ücretsiz modelleri göster</label>
                   </div>
                   
                   <Button
@@ -418,7 +421,7 @@ const AIModels = () => {
         <section className="py-12 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-bold">
+              <h2 className="text-2xl font-bold page-heading">
                 {sortedModels.length} AI Modeli Bulundu
               </h2>
             </div>
@@ -442,7 +445,7 @@ const AIModels = () => {
                 ))
               ) : (
                 <div className="col-span-full text-center py-16">
-                  <p className="text-white/70 text-lg">
+                  <p className="text-white/90 high-contrast-text text-lg">
                     Arama kriterlerinize uygun model bulunamadı.
                   </p>
                   <Button 

@@ -101,12 +101,12 @@ const UserDashboard = () => {
                     </Avatar>
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm font-medium text-white">John Doe</p>
-                    <p className="text-xs text-white/60">AI Pro Üyesi</p>
+                    <p className="text-sm font-medium text-white high-contrast-text">John Doe</p>
+                    <p className="text-xs text-white/80">AI Pro Üyesi</p>
                   </div>
                   <button
                     onClick={handleLogout}
-                    className="ml-auto text-white/60 hover:text-white"
+                    className="ml-auto text-white/70 hover:text-white"
                   >
                     <LogOut className="h-5 w-5" />
                   </button>
@@ -127,7 +127,7 @@ const UserDashboard = () => {
               <Menu className="h-6 w-6" />
             </button>
             
-            <span className="text-xl font-bold">Kullanıcı Paneli</span>
+            <span className="text-xl font-bold page-heading">Kullanıcı Paneli</span>
             
             <div className="flex items-center space-x-4">
               <button className="text-white/70 hover:text-white">
@@ -176,15 +176,15 @@ const SidebarContent = () => {
           className={`flex items-center px-2 py-2 text-sm font-medium rounded-md group
             ${location.pathname === link.to 
               ? "bg-white/10 text-white" 
-              : "text-white/70 hover:text-white hover:bg-white/5"
+              : "text-white/80 hover:text-white hover:bg-white/5"
             }`}
         >
           <link.icon className={`mr-3 h-5 w-5 ${
             location.pathname === link.to 
               ? "text-aihub-blue" 
-              : "text-white/60 group-hover:text-aihub-blue"
+              : "text-white/70 group-hover:text-aihub-blue"
           }`} />
-          {link.text}
+          <span className="high-contrast-text">{link.text}</span>
         </Link>
       ))}
     </div>
@@ -196,7 +196,7 @@ const DashboardHome = () => {
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-center justify-between">
-        <h1 className="text-2xl font-bold mb-4 sm:mb-0">Kullanıcı Paneli</h1>
+        <h1 className="text-2xl font-bold mb-4 sm:mb-0 page-heading">Kullanıcı Paneli</h1>
         <Link to="/dashboard/api-keys">
           <Button className="bg-gradient-to-r from-aihub-blue to-aihub-purple text-white hover:opacity-90">
             Yeni API Anahtarı
@@ -208,7 +208,7 @@ const DashboardHome = () => {
       <div className="p-6 rounded-lg bg-black/30 border border-white/10 backdrop-blur-sm">
         <div className="flex flex-col md:flex-row md:items-center justify-between">
           <div>
-            <p className="text-white/60 text-sm mb-1">Mevcut Abonelik</p>
+            <p className="text-white/80 high-contrast-text text-sm mb-1">Mevcut Abonelik</p>
             <h2 className="text-2xl font-bold">AI Pro</h2>
             <div className="inline-flex items-center px-2.5 py-0.5 mt-2 rounded-full text-xs font-medium bg-green-500/20 text-green-400">
               Aktif
@@ -223,7 +223,7 @@ const DashboardHome = () => {
                   style={{ width: "60%" }}
                 ></div>
               </div>
-              <span className="text-sm text-white/60">18 gün kaldı</span>
+              <span className="text-sm text-white/80 high-contrast-text">18 gün kaldı</span>
             </div>
             <div className="mt-4 space-x-2">
               <Link to="/subscription/plans">
@@ -242,64 +242,64 @@ const DashboardHome = () => {
       {/* Quick Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="p-6 rounded-lg bg-black/30 border border-white/10 backdrop-blur-sm">
-          <p className="text-white/60 text-sm">API Çağrıları (Bu Ay)</p>
+          <p className="text-white/80 high-contrast-text text-sm">API Çağrıları (Bu Ay)</p>
           <h3 className="text-2xl font-bold mt-2">3,452</h3>
           <p className="text-green-400 text-sm mt-1">+12% geçen aya göre</p>
         </div>
         
         <div className="p-6 rounded-lg bg-black/30 border border-white/10 backdrop-blur-sm">
-          <p className="text-white/60 text-sm">Token Kullanımı</p>
+          <p className="text-white/80 high-contrast-text text-sm">Token Kullanımı</p>
           <h3 className="text-2xl font-bold mt-2">125K / 500K</h3>
-          <p className="text-white/60 text-sm mt-1">25% kullanıldı</p>
+          <p className="text-white/80 high-contrast-text text-sm mt-1">25% kullanıldı</p>
         </div>
         
         <div className="p-6 rounded-lg bg-black/30 border border-white/10 backdrop-blur-sm">
-          <p className="text-white/60 text-sm">Aktif API Anahtarları</p>
+          <p className="text-white/80 high-contrast-text text-sm">Aktif API Anahtarları</p>
           <h3 className="text-2xl font-bold mt-2">3</h3>
-          <p className="text-white/60 text-sm mt-1">5 anahtara kadar</p>
+          <p className="text-white/80 high-contrast-text text-sm mt-1">5 anahtara kadar</p>
         </div>
         
         <div className="p-6 rounded-lg bg-black/30 border border-white/10 backdrop-blur-sm">
-          <p className="text-white/60 text-sm">Satın Alınan Modeller</p>
+          <p className="text-white/80 high-contrast-text text-sm">Satın Alınan Modeller</p>
           <h3 className="text-2xl font-bold mt-2">7</h3>
-          <p className="text-white/60 text-sm mt-1">2 yeni bu ay</p>
+          <p className="text-white/80 high-contrast-text text-sm mt-1">2 yeni bu ay</p>
         </div>
       </div>
       
       {/* Recent API Usage */}
       <div className="rounded-lg bg-black/30 border border-white/10 backdrop-blur-sm overflow-hidden">
         <div className="p-6">
-          <h2 className="text-xl font-bold">Son API Kullanımı</h2>
+          <h2 className="text-xl font-bold page-heading">Son API Kullanımı</h2>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-white/5">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-white/90 high-contrast-text uppercase tracking-wider">
                   Tarih
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-white/90 high-contrast-text uppercase tracking-wider">
                   Endpoint
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-white/90 high-contrast-text uppercase tracking-wider">
                   Anahtar
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-white/90 high-contrast-text uppercase tracking-wider">
                   Token
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white/60 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-white/90 high-contrast-text uppercase tracking-wider">
                   Durum
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
               <tr>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">2024-06-20 14:32</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">/api/completion</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white/60">
+                <td className="px-6 py-4 whitespace-nowrap text-sm high-contrast-text">2024-06-20 14:32</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm high-contrast-text">/api/completion</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-white/80">
                   sk_live_...f8a2
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">152</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm high-contrast-text">152</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/20 text-green-400">
                     Başarılı
@@ -307,12 +307,12 @@ const DashboardHome = () => {
                 </td>
               </tr>
               <tr>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">2024-06-20 14:30</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">/api/embedding</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white/60">
+                <td className="px-6 py-4 whitespace-nowrap text-sm high-contrast-text">2024-06-20 14:30</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm high-contrast-text">/api/embedding</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-white/80">
                   sk_live_...f8a2
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">86</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm high-contrast-text">86</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/20 text-green-400">
                     Başarılı
@@ -320,12 +320,12 @@ const DashboardHome = () => {
                 </td>
               </tr>
               <tr>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">2024-06-20 14:28</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">/api/completion</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-white/60">
+                <td className="px-6 py-4 whitespace-nowrap text-sm high-contrast-text">2024-06-20 14:28</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm high-contrast-text">/api/completion</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-white/80">
                   sk_test_...d3b7
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm">243</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm high-contrast-text">243</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-500/20 text-red-400">
                     Hata
