@@ -6,10 +6,17 @@ import QuickAccessCard from "@/components/QuickAccessCard";
 import CategoryFilter from "@/components/CategoryFilter";
 import NewsCard from "@/components/NewsCard";
 import Footer from "@/components/Footer";
-import { ArrowRight, Sparkles, BookOpen, ChevronRight, Zap, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sparkles, BookOpen, Zap, ShieldCheck, Users } from "lucide-react";
 
 const Index = () => {
+  const [activeCategory, setActiveCategory] = useState("Tümü");
+  
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+  };
+  
   return (
     <div className="min-h-screen flex flex-col bg-aihub-dark">
       <CustomNavbar />
@@ -39,28 +46,28 @@ const Index = () => {
                 title="AI Modelleri" 
                 description="En gelişmiş yapay zeka modellerini keşfedin."
                 link="/ai-models"
-                icon={<Sparkles className="h-6 w-6" />}
+                icon={<Sparkles size={24} />}
                 color="blue"
               />
               <QuickAccessCard 
                 title="AI Eğitimleri" 
                 description="Yapay zeka ile ilgili kapsamlı eğitimler."
                 link="/training"
-                icon={<BookOpen className="h-6 w-6" />}
+                icon={<BookOpen size={24} />}
                 color="purple"
               />
               <QuickAccessCard 
                 title="Marketplace" 
                 description="AI araçları ve hazır çözümler için pazar yeri."
                 link="/marketplace"
-                icon={<Zap className="h-6 w-6" />}
+                icon={<Zap size={24} />}
                 color="green"
               />
               <QuickAccessCard 
                 title="Admin Paneli" 
                 description="Yönetici arayüzüne erişim sağlayın."
                 link="/admin"
-                icon={<ShieldCheck className="h-6 w-6" />}
+                icon={<ShieldCheck size={24} />}
                 color="orange"
               />
             </div>
@@ -83,7 +90,11 @@ const Index = () => {
               </Link>
             </div>
             
-            <CategoryFilter categories={["Tümü", "AI Modelleri", "Araştırmalar", "Şirket Haberleri", "Etik", "Uygulamalar"]} />
+            <CategoryFilter 
+              categories={["Tümü", "AI Modelleri", "Araştırmalar", "Şirket Haberleri", "Etik", "Uygulamalar"]} 
+              activeCategory={activeCategory}
+              onCategoryChange={handleCategoryChange}
+            />
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
               <NewsCard 
@@ -92,7 +103,7 @@ const Index = () => {
                 excerpt="OpenAI, merakla beklenen GPT-5 modelini duyurdu. Yeni model, önceki sürümlere göre geliştirilmiş düşünme yetenekleri ve muhakeme..."
                 imageUrl="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWklMjBicmFpbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
                 category="AI Modelleri"
-                publishDate="2024-06-15"
+                publishedAt="2024-06-15"
               />
               <NewsCard 
                 id="2"
@@ -100,7 +111,7 @@ const Index = () => {
                 excerpt="Google, merakla beklenen Gemini 2.0 modelini tanıttı. Yeni model, metin, görsel ve ses verilerini daha etkili bir şekilde anlayabiliyor..."
                 imageUrl="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YWklMjB0ZWNofGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
                 category="AI Modelleri"
-                publishDate="2024-06-12"
+                publishedAt="2024-06-12"
               />
               <NewsCard 
                 id="3"
@@ -108,7 +119,7 @@ const Index = () => {
                 excerpt="Avrupa Birliği'nin kapsamlı yapay zeka düzenlemesi olan AI Act resmen yürürlüğe girdi. Yasa, yapay zeka sistemlerini risk seviyelerine göre sınıflandırıyor..."
                 imageUrl="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGV1cm9wZWFuJTIwdW5pb258ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
                 category="Etik"
-                publishDate="2024-06-10"
+                publishedAt="2024-06-10"
               />
             </div>
             
@@ -256,7 +267,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/auth/signup">
                   <Button className="bg-gradient-to-r from-aihub-blue to-aihub-purple text-white px-6 py-6 rounded-md hover:opacity-90 transition-all">
-                    <Users className="h-4 w-4 mr-2" />
+                    <Users size={16} className="mr-2" />
                     <span>Ücretsiz Kaydol</span>
                   </Button>
                 </Link>
@@ -276,5 +287,7 @@ const Index = () => {
     </div>
   );
 };
+
+import { useState } from "react";
 
 export default Index;

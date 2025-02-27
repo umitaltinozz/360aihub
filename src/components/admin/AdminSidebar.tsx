@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { 
   Home, 
   Users, 
-  Robot, 
+  Bot, 
   ShoppingBag, 
   FileText, 
   CreditCard, 
@@ -37,7 +37,7 @@ const AdminSidebar = ({ isOpen, toggleSidebar }: AdminSidebarProps) => {
   const menuItems = [
     { icon: Home, label: "Ana Sayfa", path: "/admin" },
     { icon: Users, label: "Kullanıcı Yönetimi", path: "/admin/users" },
-    { icon: Robot, label: "AI Model Yönetimi", path: "/admin/ai-models" },
+    { icon: Bot, label: "AI Model Yönetimi", path: "/admin/ai-models" },
     { icon: ShoppingBag, label: "Marketplace Yönetimi", path: "/admin/marketplace" },
     { icon: FileText, label: "İçerik Yönetimi", path: "/admin/content" },
     { icon: CreditCard, label: "Ödeme & Abonelikler", path: "/admin/payments" },

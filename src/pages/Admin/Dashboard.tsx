@@ -23,7 +23,170 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
-import { AreaChart, BarChart } from "@/components/ui/chart";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import * as Recharts from "recharts";
+
+// Define AreaChart component
+const AreaChart = ({
+  data,
+  categories,
+  index,
+  colors,
+  valueFormatter,
+  className,
+}: {
+  data: any[];
+  categories: string[];
+  index: string;
+  colors: string[];
+  valueFormatter?: (value: number) => string;
+  className?: string;
+}) => {
+  return (
+    <ChartContainer
+      className={className}
+      config={{}}
+    >
+      <Recharts.ComposedChart data={data}>
+        <Recharts.XAxis
+          dataKey={index}
+          stroke="#888888"
+          fontSize={12}
+          tickLine={false}
+          axisLine={false}
+        />
+        <Recharts.YAxis
+          stroke="#888888"
+          fontSize={12}
+          tickLine={false}
+          axisLine={false}
+          tickFormatter={(value) => valueFormatter ? valueFormatter(value) : value}
+        />
+        <Recharts.CartesianGrid strokeDasharray="3 3" stroke="#404040" />
+        <Recharts.Tooltip
+          content={({ active, payload }) => {
+            if (active && payload && payload.length) {
+              return (
+                <div className="rounded-lg border bg-[#252525] border-white/10 p-2 shadow-md">
+                  <div className="grid grid-cols-2 gap-2">
+                    {payload.map((entry, index) => (
+                      <div key={`item-${index}`} className="flex flex-col">
+                        <span
+                          className="text-xs font-medium"
+                          style={{ color: entry.color }}
+                        >
+                          {entry.name}
+                        </span>
+                        <span className="text-xs text-white">
+                          {valueFormatter
+                            ? valueFormatter(entry.value as number)
+                            : entry.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+            return null;
+          }}
+        />
+        {categories.map((category, index) => (
+          <Recharts.Area
+            key={category}
+            type="monotone"
+            dataKey={category}
+            stroke={colors[index % colors.length]}
+            fill={colors[index % colors.length] + "20"}
+            strokeWidth={2}
+          />
+        ))}
+      </Recharts.ComposedChart>
+    </ChartContainer>
+  );
+};
+
+// Define BarChart component
+const BarChart = ({
+  data,
+  categories,
+  index,
+  colors,
+  valueFormatter,
+  className,
+}: {
+  data: any[];
+  categories: string[];
+  index: string;
+  colors: string[];
+  valueFormatter?: (value: number) => string;
+  className?: string;
+}) => {
+  return (
+    <ChartContainer
+      className={className}
+      config={{}}
+    >
+      <Recharts.BarChart data={data}>
+        <Recharts.XAxis
+          dataKey={index}
+          stroke="#888888"
+          fontSize={12}
+          tickLine={false}
+          axisLine={false}
+        />
+        <Recharts.YAxis
+          stroke="#888888"
+          fontSize={12}
+          tickLine={false}
+          axisLine={false}
+          tickFormatter={(value) => valueFormatter ? valueFormatter(value) : value}
+        />
+        <Recharts.CartesianGrid strokeDasharray="3 3" stroke="#404040" vertical={false} />
+        <Recharts.Tooltip
+          content={({ active, payload }) => {
+            if (active && payload && payload.length) {
+              return (
+                <div className="rounded-lg border bg-[#252525] border-white/10 p-2 shadow-md">
+                  <div className="grid grid-cols-2 gap-2">
+                    {payload.map((entry, index) => (
+                      <div key={`item-${index}`} className="flex flex-col">
+                        <span
+                          className="text-xs font-medium"
+                          style={{ color: entry.color }}
+                        >
+                          {entry.name}
+                        </span>
+                        <span className="text-xs text-white">
+                          {valueFormatter
+                            ? valueFormatter(entry.value as number)
+                            : entry.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+            return null;
+          }}
+        />
+        {categories.map((category, index) => (
+          <Recharts.Bar
+            key={category}
+            dataKey={category}
+            fill={colors[index % colors.length]}
+            radius={[4, 4, 0, 0]}
+          />
+        ))}
+      </Recharts.BarChart>
+    </ChartContainer>
+  );
+};
 
 const AdminDashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
