@@ -30,6 +30,11 @@ import SubscriptionPlans from "@/pages/Subscription/SubscriptionPlans";
 import PricingPlans from "@/pages/Subscription/PricingPlans";
 import PaymentPage from "@/pages/Subscription/PaymentPage";
 
+// Admin Panel
+import AdminLayout from "@/components/admin/AdminLayout";
+import AdminDashboard from "@/pages/Admin/Dashboard";
+import UserManagement from "@/pages/Admin/UserManagement";
+
 import { Toaster } from "@/components/ui/toaster";
 import "./App.css";
 
@@ -64,6 +69,13 @@ function App() {
         <Route path="/subscription/plans" element={<SubscriptionPlans />} />
         <Route path="/subscription/pricing" element={<PricingPlans />} />
         <Route path="/subscription/payment" element={<PaymentPage />} />
+        
+        {/* Admin Panel */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="users" element={<UserManagement />} />
+          {/* Diğer admin sayfaları eklenecek */}
+        </Route>
         
         {/* 404 Sayfası */}
         <Route path="*" element={<NotFound />} />

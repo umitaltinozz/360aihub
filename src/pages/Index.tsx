@@ -1,191 +1,272 @@
 
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, Globe, BarChart, ShoppingCart, UserCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Hero from "@/components/Hero";
-import QuickAccessCard from "@/components/QuickAccessCard";
-import NewsCard from "@/components/NewsCard";
 import CustomNavbar from "@/components/CustomNavbar";
+import QuickAccessCard from "@/components/QuickAccessCard";
+import CategoryFilter from "@/components/CategoryFilter";
+import NewsCard from "@/components/NewsCard";
 import Footer from "@/components/Footer";
-import { useToast } from "@/hooks/use-toast";
-
-// Mock news data
-const featuredNews = [
-  {
-    id: "1",
-    title: "OpenAI GPT-5 Geliştirme Çalışmalarına Başladı",
-    excerpt: "OpenAI şirketi, GPT-4'ün başarısının ardından GPT-5 geliştirme çalışmalarına başladığını duyurdu.",
-    category: "Genel AI",
-    imageUrl: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    publishedAt: "2023-10-15T14:30:00Z",
-  },
-  {
-    id: "2",
-    title: "AI Destekli Sağlık Teknolojilerinde Yeni Gelişmeler",
-    excerpt: "Yapay zeka destekli sağlık teknolojileri, erken teşhis ve tedavi planlamada devrim yaratıyor.",
-    category: "Sağlık",
-    imageUrl: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    publishedAt: "2023-10-14T09:15:00Z",
-  },
-  {
-    id: "3",
-    title: "Finans Sektöründe AI Kullanımı Artıyor",
-    excerpt: "Bankaların %70'i yapay zeka teknolojilerini operasyonlarına entegre etmeyi planlıyor.",
-    category: "Finans",
-    imageUrl: "https://images.unsplash.com/photo-1607962837359-5e7e89f86776?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    publishedAt: "2023-10-12T11:45:00Z",
-  },
-];
-
-// Quick access cards data
-const quickAccessData = [
-  {
-    title: "AI Haberleri",
-    description: "Dünya genelinde yapay zeka alanındaki son gelişmeler ve haberler",
-    icon: Globe,
-    bgColor: "bg-aihub-blue",
-    link: "/ai-news"
-  },
-  {
-    title: "AI Modelleri",
-    description: "En yeni ve popüler yapay zeka modellerine hızlı erişim",
-    icon: BarChart,
-    bgColor: "bg-aihub-purple",
-    link: "/ai-models"
-  },
-  {
-    title: "Eğitimler",
-    description: "Ücretsiz ve premium yapay zeka kursları ve eğitim kaynakları",
-    icon: BookOpen,
-    bgColor: "bg-green-500",
-    link: "/training"
-  },
-  {
-    title: "Marketplace",
-    description: "AI model ve promptlarını satın alabileceğiniz ve satabileceğiniz platform",
-    icon: ShoppingCart,
-    bgColor: "bg-amber-500",
-    link: "/marketplace"
-  },
-];
+import { ArrowRight, Sparkles, BookOpen, ChevronRight, Zap, ShieldCheck, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
-  const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-      
-      // Show welcome toast
-      toast({
-        title: "AIHUB360'a Hoş Geldiniz",
-        description: "Yapay zeka dünyasını keşfetmeye hazır mısınız?",
-      });
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [toast]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-aihub-dark">
-        <div className="text-4xl font-bold text-gradient animate-pulse">AIHUB360</div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen flex flex-col bg-aihub-dark">
       <CustomNavbar />
       
-      <main className="flex-grow pt-16">
+      <main className="flex-grow">
         {/* Hero Section */}
         <Hero />
-
-        {/* Quick Access Cards */}
-        <section className="section-padding">
+        
+        {/* Quick Access Section */}
+        <section className="py-16 px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col items-center mb-12 text-center">
-              <h2 className="text-3xl font-bold mb-4">Hızlı Erişim</h2>
-              <p className="text-white/70 max-w-2xl">
-                Yapay zeka dünyasındaki en önemli kaynaklara tek tıkla ulaşın
-              </p>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10">
+              <div>
+                <h2 className="text-3xl font-bold mb-2">Hızlı Erişim</h2>
+                <p className="text-white/70">En popüler hizmet ve kaynaklara kolayca erişin.</p>
+              </div>
+              <Link to="/ai-models">
+                <Button variant="link" className="text-aihub-blue pl-0 flex items-center mt-4 sm:mt-0">
+                  <span>Tümünü Gör</span>
+                  <ChevronRight className="h-4 w-4 ml-1" />
+                </Button>
+              </Link>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in">
-              {quickAccessData.map((card, index) => (
-                <Link to={card.link} key={index} className="block">
-                  <QuickAccessCard 
-                    title={card.title}
-                    description={card.description}
-                    icon={card.icon}
-                    bgColor={card.bgColor}
-                  />
-                </Link>
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <QuickAccessCard 
+                title="AI Modelleri" 
+                description="En gelişmiş yapay zeka modellerini keşfedin."
+                link="/ai-models"
+                icon={<Sparkles className="h-6 w-6" />}
+                color="blue"
+              />
+              <QuickAccessCard 
+                title="AI Eğitimleri" 
+                description="Yapay zeka ile ilgili kapsamlı eğitimler."
+                link="/training"
+                icon={<BookOpen className="h-6 w-6" />}
+                color="purple"
+              />
+              <QuickAccessCard 
+                title="Marketplace" 
+                description="AI araçları ve hazır çözümler için pazar yeri."
+                link="/marketplace"
+                icon={<Zap className="h-6 w-6" />}
+                color="green"
+              />
+              <QuickAccessCard 
+                title="Admin Paneli" 
+                description="Yönetici arayüzüne erişim sağlayın."
+                link="/admin"
+                icon={<ShieldCheck className="h-6 w-6" />}
+                color="orange"
+              />
             </div>
-
-            {/* Access to Dashboard & Auth Buttons */}
-            <div className="flex flex-col md:flex-row justify-center items-center mt-12 gap-4">
-              <Link to="/dashboard">
-                <Button variant="outline" className="w-full md:w-auto flex items-center gap-2 border-white/20 hover:bg-white/5">
-                  <UserCircle className="h-5 w-5" />
-                  Kullanıcı Paneli
+          </div>
+        </section>
+        
+        {/* Latest AI News Section */}
+        <section className="py-16 px-6 bg-aihub-gray">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10">
+              <div>
+                <h2 className="text-3xl font-bold mb-2">AI Dünyasından Son Haberler</h2>
+                <p className="text-white/70">Yapay zeka alanındaki en güncel gelişmeleri takip edin.</p>
+              </div>
+              <Link to="/ai-news">
+                <Button variant="link" className="text-aihub-purple pl-0 flex items-center mt-4 sm:mt-0">
+                  <span>Tüm Haberleri Gör</span>
+                  <ChevronRight className="h-4 w-4 ml-1" />
                 </Button>
               </Link>
-              <Link to="/auth/signin">
-                <Button variant="outline" className="w-full md:w-auto border-white/20 hover:bg-white/5">
-                  Giriş Yap
-                </Button>
-              </Link>
-              <Link to="/auth/signup">
-                <Button className="w-full md:w-auto bg-gradient-to-r from-aihub-blue to-aihub-purple hover:opacity-90">
-                  Ücretsiz Kaydol
-                </Button>
-              </Link>
-              <Link to="/subscription/pricing">
-                <Button variant="outline" className="w-full md:w-auto border-aihub-blue/30 text-aihub-blue hover:bg-aihub-blue/10">
-                  Fiyatlandırma Planları
+            </div>
+            
+            <CategoryFilter categories={["Tümü", "AI Modelleri", "Araştırmalar", "Şirket Haberleri", "Etik", "Uygulamalar"]} />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+              <NewsCard 
+                id="1"
+                title="OpenAI GPT-5 Modelini Duyurdu: 'Düşünme Yetenekleri Geliştirildi'"
+                excerpt="OpenAI, merakla beklenen GPT-5 modelini duyurdu. Yeni model, önceki sürümlere göre geliştirilmiş düşünme yetenekleri ve muhakeme..."
+                imageUrl="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWklMjBicmFpbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+                category="AI Modelleri"
+                publishDate="2024-06-15"
+              />
+              <NewsCard 
+                id="2"
+                title="Google, Yeni Gemini 2.0 Modelini Tanıttı: 'Multimodal Kabiliyetler Artırıldı'"
+                excerpt="Google, merakla beklenen Gemini 2.0 modelini tanıttı. Yeni model, metin, görsel ve ses verilerini daha etkili bir şekilde anlayabiliyor..."
+                imageUrl="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YWklMjB0ZWNofGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
+                category="AI Modelleri"
+                publishDate="2024-06-12"
+              />
+              <NewsCard 
+                id="3"
+                title="AB'den Yapay Zeka Düzenlemeleri: Yeni AI Yasası Yürürlüğe Girdi"
+                excerpt="Avrupa Birliği'nin kapsamlı yapay zeka düzenlemesi olan AI Act resmen yürürlüğe girdi. Yasa, yapay zeka sistemlerini risk seviyelerine göre sınıflandırıyor..."
+                imageUrl="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGV1cm9wZWFuJTIwdW5pb258ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
+                category="Etik"
+                publishDate="2024-06-10"
+              />
+            </div>
+            
+            <div className="mt-12 text-center">
+              <Link to="/ai-news">
+                <Button className="bg-gradient-to-r from-aihub-blue to-aihub-purple text-white px-6 py-6 rounded-md hover:opacity-90 transition-all">
+                  <span className="mr-2">Daha Fazla Haber</span>
+                  <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
             </div>
           </div>
         </section>
-
-        {/* Featured News */}
-        <section className="section-padding bg-gradient-to-b from-aihub-dark to-aihub-dark/90">
+        
+        {/* Featured AI Models */}
+        <section className="py-16 px-6">
           <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-center mb-10">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10">
               <div>
-                <h2 className="text-3xl font-bold mb-2">Son AI Haberleri</h2>
-                <p className="text-white/70 text-sm">
-                  Yapay zeka dünyasının en güncel haberleri
-                </p>
+                <h2 className="text-3xl font-bold mb-2">Öne Çıkan AI Modelleri</h2>
+                <p className="text-white/70">En çok kullanılan ve popüler yapay zeka modelleri.</p>
               </div>
-              <Link to="/ai-news">
-                <Button variant="ghost" className="text-aihub-blue hover:bg-aihub-blue/10">
-                  <span className="mr-2">Tümünü Gör</span>
-                  <ArrowRight className="h-4 w-4" />
+              <Link to="/ai-models">
+                <Button variant="link" className="text-aihub-blue pl-0 flex items-center mt-4 sm:mt-0">
+                  <span>Tüm Modelleri Gör</span>
+                  <ChevronRight className="h-4 w-4 ml-1" />
                 </Button>
               </Link>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
-              {featuredNews.map((news) => (
-                <Link to={`/news/${news.id}`} key={news.id}>
-                  <NewsCard 
-                    id={news.id}
-                    title={news.title}
-                    excerpt={news.excerpt}
-                    category={news.category}
-                    imageUrl={news.imageUrl}
-                    publishedAt={news.publishedAt}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="glass rounded-xl overflow-hidden card-hover">
+                <div className="relative h-40 overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    alt="OpenAI GPT-4"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <div className="absolute top-0 right-0 m-2">
+                    <div className="bg-aihub-blue text-white text-xs font-semibold px-2 py-1 rounded-full">
+                      Popüler
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="text-xl font-semibold mb-1">OpenAI GPT-4</h3>
+                  <p className="text-white/70 text-sm mb-3">Gelişmiş dil anlama ve üretme yetenekleri ile çoklu görevlerde etkin.</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="bg-white/10 text-xs px-2 py-1 rounded-full">Dil Modeli</span>
+                    <span className="bg-white/10 text-xs px-2 py-1 rounded-full">Kod Yazma</span>
+                    <span className="bg-white/10 text-xs px-2 py-1 rounded-full">Çok Modlu</span>
+                  </div>
+                  <Link to="/model/1">
+                    <Button variant="outline" className="w-full border-white/10 hover:bg-white/5">
+                      İncele
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              
+              <div className="glass rounded-xl overflow-hidden card-hover">
+                <div className="relative h-40 overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    alt="Claude 3 Opus"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-xl font-semibold mb-1">Claude 3 Opus</h3>
+                  <p className="text-white/70 text-sm mb-3">Uzun bağlam anlama ve detaylı açıklamalarda güçlü performans.</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="bg-white/10 text-xs px-2 py-1 rounded-full">Dil Modeli</span>
+                    <span className="bg-white/10 text-xs px-2 py-1 rounded-full">Doğruluk</span>
+                    <span className="bg-white/10 text-xs px-2 py-1 rounded-full">Güvenlik</span>
+                  </div>
+                  <Link to="/model/3">
+                    <Button variant="outline" className="w-full border-white/10 hover:bg-white/5">
+                      İncele
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              
+              <div className="glass rounded-xl overflow-hidden card-hover">
+                <div className="relative h-40 overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1579403124614-197f69d8187b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    alt="Stable Diffusion XL"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <div className="absolute top-2 left-2">
+                    <div className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
+                      Ücretsiz
+                    </div>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="text-xl font-semibold mb-1">Stable Diffusion XL</h3>
+                  <p className="text-white/70 text-sm mb-3">Metinden görsel üreten güçlü açık kaynaklı AI modeli.</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="bg-white/10 text-xs px-2 py-1 rounded-full">Görsel Üretme</span>
+                    <span className="bg-white/10 text-xs px-2 py-1 rounded-full">Düşük Gecikme</span>
+                  </div>
+                  <Link to="/model/4">
+                    <Button variant="outline" className="w-full border-white/10 hover:bg-white/5">
+                      İncele
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* User Stats Section */}
+        <section className="py-16 px-6 bg-gradient-to-b from-aihub-gray to-aihub-dark">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-14">
+              <h2 className="text-3xl font-bold mb-2">AIHUB360 Topluluğu</h2>
+              <p className="text-white/70 max-w-2xl mx-auto">Yapay zeka dünyasının öncü topluluğuna katılın ve en son teknolojilerden yararlanın.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="glass p-6 rounded-xl text-center card-hover">
+                <div className="text-4xl font-bold mb-2 text-gradient">2.5M+</div>
+                <p className="text-white/70">Toplam Kullanıcı</p>
+              </div>
+              <div className="glass p-6 rounded-xl text-center card-hover">
+                <div className="text-4xl font-bold mb-2 text-gradient">120+</div>
+                <p className="text-white/70">AI Modeli</p>
+              </div>
+              <div className="glass p-6 rounded-xl text-center card-hover">
+                <div className="text-4xl font-bold mb-2 text-gradient">500+</div>
+                <p className="text-white/70">Eğitim İçeriği</p>
+              </div>
+              <div className="glass p-6 rounded-xl text-center card-hover">
+                <div className="text-4xl font-bold mb-2 text-gradient">50M+</div>
+                <p className="text-white/70">Aylık API Çağrısı</p>
+              </div>
+            </div>
+            
+            <div className="mt-16 text-center">
+              <p className="text-xl text-white/90 mb-6 max-w-3xl mx-auto">Hemen kaydolun ve yapay zeka dünyasını keşfetmeye başlayın!</p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/auth/signup">
+                  <Button className="bg-gradient-to-r from-aihub-blue to-aihub-purple text-white px-6 py-6 rounded-md hover:opacity-90 transition-all">
+                    <Users className="h-4 w-4 mr-2" />
+                    <span>Ücretsiz Kaydol</span>
+                  </Button>
                 </Link>
-              ))}
+                <Link to="/subscription/plans">
+                  <Button variant="outline" className="border-white/10 bg-white/5 hover:bg-white/10 px-6 py-6">
+                    <span className="mr-2">Abonelik Planları</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
