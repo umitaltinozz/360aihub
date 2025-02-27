@@ -34,6 +34,8 @@ import PaymentPage from "@/pages/Subscription/PaymentPage";
 import AdminLayout from "@/components/admin/AdminLayout";
 import AdminDashboard from "@/pages/Admin/Dashboard";
 import UserManagement from "@/pages/Admin/UserManagement";
+import AdminProfile from "@/pages/Admin/AdminProfile";
+import AdminSettings from "@/pages/Admin/AdminSettings";
 
 import { Toaster } from "@/components/ui/toaster";
 import "./App.css";
@@ -74,7 +76,20 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="users" element={<UserManagement />} />
-          {/* Diğer admin sayfaları eklenecek */}
+          <Route path="profile" element={<AdminProfile />} />
+          <Route path="settings" element={<AdminSettings />} />
+          {/* 
+            Diğer admin sayfaları eklenecek:
+            <Route path="ai-models" element={<AIModelManagement />} />
+            <Route path="ai-models/new" element={<AddAIModel />} />
+            <Route path="marketplace" element={<MarketplaceManagement />} />
+            <Route path="content" element={<ContentManagement />} />
+            <Route path="payments" element={<PaymentManagement />} />
+            <Route path="support" element={<SupportRequests />} />
+            <Route path="reports/users" element={<UserReports />} />
+            <Route path="reports/sales" element={<SalesReports />} />
+            <Route path="notifications" element={<AdminNotifications />} />
+          */}
         </Route>
         
         {/* 404 Sayfası */}
