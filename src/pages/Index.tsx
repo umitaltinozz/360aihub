@@ -6,9 +6,17 @@ import QuickAccessCard from "@/components/QuickAccessCard";
 import CategoryFilter from "@/components/CategoryFilter";
 import NewsCard from "@/components/NewsCard";
 import Footer from "@/components/Footer";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { 
+  ArrowRight, 
+  ChevronRight, 
+  Sparkles, 
+  BookOpen, 
+  Zap, 
+  ShieldCheck, 
+  Users 
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sparkles, BookOpen, Zap, ShieldCheck, Users } from "lucide-react";
+import { useState } from "react";
 
 const Index = () => {
   const [activeCategory, setActiveCategory] = useState("Tümü");
@@ -46,28 +54,28 @@ const Index = () => {
                 title="AI Modelleri" 
                 description="En gelişmiş yapay zeka modellerini keşfedin."
                 link="/ai-models"
-                icon={<Sparkles size={24} />}
+                icon={Sparkles}
                 color="blue"
               />
               <QuickAccessCard 
                 title="AI Eğitimleri" 
                 description="Yapay zeka ile ilgili kapsamlı eğitimler."
                 link="/training"
-                icon={<BookOpen size={24} />}
+                icon={BookOpen}
                 color="purple"
               />
               <QuickAccessCard 
                 title="Marketplace" 
                 description="AI araçları ve hazır çözümler için pazar yeri."
                 link="/marketplace"
-                icon={<Zap size={24} />}
+                icon={Zap}
                 color="green"
               />
               <QuickAccessCard 
                 title="Admin Paneli" 
                 description="Yönetici arayüzüne erişim sağlayın."
                 link="/admin"
-                icon={<ShieldCheck size={24} />}
+                icon={ShieldCheck}
                 color="orange"
               />
             </div>
@@ -267,7 +275,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/auth/signup">
                   <Button className="bg-gradient-to-r from-aihub-blue to-aihub-purple text-white px-6 py-6 rounded-md hover:opacity-90 transition-all">
-                    <Users size={16} className="mr-2" />
+                    <Users className="h-4 w-4 mr-2" />
                     <span>Ücretsiz Kaydol</span>
                   </Button>
                 </Link>
@@ -287,7 +295,5 @@ const Index = () => {
     </div>
   );
 };
-
-import { useState } from "react";
 
 export default Index;
