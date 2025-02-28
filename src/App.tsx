@@ -11,6 +11,9 @@ import Training from "@/pages/Training";
 import ModelDetail from "@/pages/ModelDetail";
 import NewsDetail from "@/pages/NewsDetail";
 import NotFound from "@/pages/NotFound";
+import PromptGenerator from "@/pages/PromptGenerator";
+import AIPriceCompare from "@/pages/AIPriceCompare";
+import MyPrompts from "@/pages/MyPrompts";
 
 // Kimlik Doğrulama
 import SignIn from "@/pages/Auth/SignIn";
@@ -63,6 +66,9 @@ function App() {
         <Route path="/training" element={<Training />} />
         <Route path="/model/:id" element={<ModelDetail />} />
         <Route path="/news/:id" element={<NewsDetail />} />
+        <Route path="/prompt-generator" element={<PromptGenerator />} />
+        <Route path="/prompt-generator/my-prompts" element={<MyPrompts />} />
+        <Route path="/ai-price-compare" element={<AIPriceCompare />} />
         
         {/* Kimlik Doğrulama */}
         <Route path="/auth/signin" element={<SignIn />} />
