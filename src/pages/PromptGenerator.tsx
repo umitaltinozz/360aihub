@@ -263,7 +263,7 @@ const PromptGenerator = () => {
       toast({
         title: "Uyarı",
         description: "Lütfen bir prompt metni girin.",
-        variant: "warning",
+        variant: "destructive", // "warning" yerine "destructive" kullanıldı
       });
       return;
     }

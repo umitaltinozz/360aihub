@@ -27,7 +27,9 @@ import {
   EyeOff,
   Building,
   Bitcoin,
-  Image
+  Image,
+  Sparkles,
+  Code
 } from "lucide-react";
 import {
   Card,
