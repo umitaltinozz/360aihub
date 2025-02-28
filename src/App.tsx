@@ -37,6 +37,17 @@ import UserManagement from "@/pages/Admin/UserManagement";
 import AdminProfile from "@/pages/Admin/AdminProfile";
 import AdminSettings from "@/pages/Admin/AdminSettings";
 
+// Yeni Admin Sayfaları
+import AIModelManagement from "@/pages/Admin/AIModelManagement";
+import AddAIModel from "@/pages/Admin/AddAIModel";
+import MarketplaceManagement from "@/pages/Admin/MarketplaceManagement";
+import ContentManagement from "@/pages/Admin/ContentManagement";
+import PaymentManagement from "@/pages/Admin/PaymentManagement";
+import SupportRequests from "@/pages/Admin/SupportRequests";
+import UserReports from "@/pages/Admin/UserReports";
+import SalesReports from "@/pages/Admin/SalesReports";
+import AdminNotifications from "@/pages/Admin/AdminNotifications";
+
 import { Toaster } from "@/components/ui/toaster";
 import "./App.css";
 
@@ -78,18 +89,17 @@ function App() {
           <Route path="users" element={<UserManagement />} />
           <Route path="profile" element={<AdminProfile />} />
           <Route path="settings" element={<AdminSettings />} />
-          {/* 
-            Diğer admin sayfaları eklenecek:
-            <Route path="ai-models" element={<AIModelManagement />} />
-            <Route path="ai-models/new" element={<AddAIModel />} />
-            <Route path="marketplace" element={<MarketplaceManagement />} />
-            <Route path="content" element={<ContentManagement />} />
-            <Route path="payments" element={<PaymentManagement />} />
-            <Route path="support" element={<SupportRequests />} />
-            <Route path="reports/users" element={<UserReports />} />
-            <Route path="reports/sales" element={<SalesReports />} />
-            <Route path="notifications" element={<AdminNotifications />} />
-          */}
+          
+          {/* Yeni admin rotaları */}
+          <Route path="ai-models" element={<AIModelManagement />} />
+          <Route path="ai-models/new" element={<AddAIModel />} />
+          <Route path="marketplace" element={<MarketplaceManagement />} />
+          <Route path="content" element={<ContentManagement />} />
+          <Route path="payments" element={<PaymentManagement />} />
+          <Route path="support" element={<SupportRequests />} />
+          <Route path="reports/users" element={<UserReports />} />
+          <Route path="reports/sales" element={<SalesReports />} />
+          <Route path="notifications" element={<AdminNotifications />} />
         </Route>
         
         {/* 404 Sayfası */}
