@@ -19,7 +19,14 @@ import {
   Zap,
   Flame,
   Clock,
-  Download
+  Download,
+  Code,
+  Upload,
+  Folder,
+  ChevronRight,
+  Info,
+  CheckCircle,
+  MoreHorizontal
 } from "lucide-react";
 import {
   Card,
@@ -729,7 +736,7 @@ Sonuç yüksek kaliteli ve belirtilen modelin yetenekleriyle uyumlu olmalıdır.
                             Satışa Çıkar
                           </Button>
                           <p className="text-xs text-white/50 ml-4">
-                            <InfoCircle className="h-3 w-3 inline mr-1" />
+                            <Info className="h-3 w-3 inline mr-1" />
                             Komisyon oranı: %5
                           </p>
                         </div>
@@ -977,8 +984,5 @@ Sonuç yüksek kaliteli ve belirtilen modelin yetenekleriyle uyumlu olmalıdır.
     </>
   );
 };
-
-// Eksik bileşenleri tanımla
-import { Code, Upload, Folder, ChevronRight, InfoCircle } from "lucide-react";
 
 export default PromptGenerator;
