@@ -15,6 +15,11 @@ import PromptGenerator from "@/pages/PromptGenerator";
 import AIPriceCompare from "@/pages/AIPriceCompare";
 import MyPrompts from "@/pages/MyPrompts";
 
+// Marketplace Sayfaları
+import MarketplaceItemDetail from "@/pages/MarketplaceItemDetail";
+import MarketplaceCheckout from "@/pages/MarketplaceCheckout";
+import MarketplaceSell from "@/pages/MarketplaceSell";
+
 // Kimlik Doğrulama
 import SignIn from "@/pages/Auth/SignIn";
 import SignUp from "@/pages/Auth/SignUp";
@@ -27,11 +32,19 @@ import UserDashboard from "@/pages/Dashboard/UserDashboard";
 import UserProfile from "@/pages/Dashboard/UserProfile";
 import APIKeys from "@/pages/Dashboard/APIKeys";
 import PaymentHistory from "@/pages/Dashboard/PaymentHistory";
+import UserSettings from "@/pages/Dashboard/UserSettings";
+import Usage from "@/pages/Dashboard/Usage";
+import UserDocumentation from "@/pages/Dashboard/UserDocumentation";
+import UserModels from "@/pages/Dashboard/UserModels";
+import UserPrompts from "@/pages/Dashboard/UserPrompts";
+import UserNotifications from "@/pages/Dashboard/UserNotifications";
 
 // Abonelik
 import SubscriptionPlans from "@/pages/Subscription/SubscriptionPlans";
 import PricingPlans from "@/pages/Subscription/PricingPlans";
 import PaymentPage from "@/pages/Subscription/PaymentPage";
+import ManageSubscription from "@/pages/Subscription/ManageSubscription";
+import BillingHistory from "@/pages/Subscription/BillingHistory";
 
 // Admin Panel
 import AdminLayout from "@/components/admin/AdminLayout";
@@ -70,6 +83,11 @@ function App() {
         <Route path="/prompt-generator/my-prompts" element={<MyPrompts />} />
         <Route path="/ai-price-compare" element={<AIPriceCompare />} />
         
+        {/* Marketplace Sayfaları */}
+        <Route path="/marketplace/:id" element={<MarketplaceItemDetail />} />
+        <Route path="/marketplace/checkout" element={<MarketplaceCheckout />} />
+        <Route path="/marketplace/sell" element={<MarketplaceSell />} />
+        
         {/* Kimlik Doğrulama */}
         <Route path="/auth/signin" element={<SignIn />} />
         <Route path="/auth/signup" element={<SignUp />} />
@@ -79,15 +97,24 @@ function App() {
         
         {/* Kullanıcı Paneli */}
         <Route path="/dashboard" element={<UserDashboard />}>
+          <Route index element={<Usage />} />
           <Route path="profile" element={<UserProfile />} />
           <Route path="api-keys" element={<APIKeys />} />
           <Route path="payments" element={<PaymentHistory />} />
+          <Route path="settings" element={<UserSettings />} />
+          <Route path="usage" element={<Usage />} />
+          <Route path="docs" element={<UserDocumentation />} />
+          <Route path="models" element={<UserModels />} />
+          <Route path="prompts" element={<UserPrompts />} />
+          <Route path="notifications" element={<UserNotifications />} />
         </Route>
         
         {/* Abonelik */}
         <Route path="/subscription/plans" element={<SubscriptionPlans />} />
         <Route path="/subscription/pricing" element={<PricingPlans />} />
         <Route path="/subscription/payment" element={<PaymentPage />} />
+        <Route path="/subscription/manage" element={<ManageSubscription />} />
+        <Route path="/subscription/billing" element={<BillingHistory />} />
         
         {/* Admin Panel */}
         <Route path="/admin" element={<AdminLayout />}>
