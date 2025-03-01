@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Navbar from "@/components/Navbar";
+import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -61,7 +61,7 @@ const Forum = () => {
 
   return (
     <div className="min-h-screen bg-aihub-dark flex flex-col">
-      <Navbar />
+      <Topbar />
       
       <div className="container mx-auto py-24 px-4 flex-grow">
         <div className="max-w-7xl mx-auto">
