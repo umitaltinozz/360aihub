@@ -1,86 +1,105 @@
 
-import { 
-  Card, 
-  CardContent, 
-  CardDescription, 
-  CardHeader, 
-  CardTitle 
-} from "@/components/ui/card";
-import { Search, Database, Download, FileBarChart, Clock } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import React from 'react';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Search, Download, ExternalLink } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Datasets = () => {
   const datasets = [
     {
       id: 1,
-      title: "Türkçe Konuşma Metinleri",
-      description: "Türkçe konuşma dili örneklerinden oluşan geniş bir veri seti",
-      category: "Metin",
-      size: "2.3GB",
-      samples: "450,000",
-      isNew: true
+      title: "Türkçe Soru-Cevap",
+      description: "Yapay zeka eğitimi için 10,000+ Türkçe soru-cevap çifti içeren veri seti",
+      category: "Doğal Dil İşleme",
+      size: "1.2 GB",
+      downloads: "3,456",
+      lastUpdated: "2 ay önce",
+      license: "MIT"
     },
     {
       id: 2,
-      title: "Görüntü Sınıflandırma Veri Seti",
-      description: "10 farklı kategoride sınıflandırılmış Türkiye'den manzara görüntüleri",
-      category: "Görüntü",
-      size: "4.5GB",
-      samples: "25,000",
-      isNew: false
+      title: "Türkçe Duygusal Metinler",
+      description: "Duygu analizi için etiketlenmiş 50,000+ Türkçe metin içeren veri seti",
+      category: "Duygu Analizi",
+      size: "850 MB",
+      downloads: "2,813",
+      lastUpdated: "3 ay önce",
+      license: "CC-BY-4.0"
     },
     {
       id: 3,
       title: "Türkçe Haber Metinleri",
-      description: "Türk haber kaynaklarından toplanmış ve kategorize edilmiş haber metinleri",
-      category: "Metin",
-      size: "1.8GB",
-      samples: "300,000",
-      isNew: false
+      description: "NLP modelleri için 100,000+ Türkçe haber metni içeren veri seti",
+      category: "Doğal Dil İşleme",
+      size: "3.5 GB",
+      downloads: "5,124",
+      lastUpdated: "1 ay önce",
+      license: "MIT"
     },
     {
       id: 4,
-      title: "Ses Kayıtları Koleksiyonu",
-      description: "Farklı ortamlarda ve aksan bölgelerinde kaydedilmiş Türkçe ses örnekleri",
-      category: "Ses",
-      size: "5.2GB",
-      samples: "12,000",
-      isNew: true
+      title: "Türkçe Görüntü Sınıflandırma",
+      description: "Türkiye'ye özgü nesnelerin bulunduğu etiketlenmiş 50,000+ görüntü",
+      category: "Bilgisayarlı Görü",
+      size: "5.8 GB",
+      downloads: "1,945",
+      lastUpdated: "4 ay önce",
+      license: "CC-BY-4.0"
     },
     {
       id: 5,
-      title: "Sentiment Analizi Veri Seti",
-      description: "Türkçe sosyal medya yorumlarından duygu analizi için etiketlenmiş veri seti",
-      category: "Metin",
-      size: "780MB",
-      samples: "120,000",
-      isNew: false
+      title: "Türkçe Konuşma Kayıtları",
+      description: "Konuşma tanıma için 500+ saatlik etiketlenmiş Türkçe ses kaydı",
+      category: "Konuşma Tanıma",
+      size: "12 GB",
+      downloads: "1,256",
+      lastUpdated: "5 ay önce",
+      license: "Apache 2.0"
     },
     {
       id: 6,
-      title: "E-Ticaret Ürün Açıklamaları",
-      description: "Türkiye'deki e-ticaret sitelerinden toplanmış ürün açıklamaları",
-      category: "Metin",
-      size: "1.1GB",
-      samples: "200,000",
-      isNew: false
+      title: "Türkçe Tweet Duygu Analizi",
+      description: "Sosyal medya duygu analizi için etiketlenmiş 1 milyon+ Türkçe tweet",
+      category: "Duygu Analizi",
+      size: "2.3 GB",
+      downloads: "3,712",
+      lastUpdated: "3 ay önce",
+      license: "CC-BY-NC-4.0"
     }
   ];
 
   const getCategoryBadge = (category: string) => {
     switch (category) {
-      case "Metin":
-        return <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/30">Metin</Badge>;
-      case "Görüntü":
-        return <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/30">Görüntü</Badge>;
-      case "Ses":
-        return <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/30">Ses</Badge>;
+      case "Doğal Dil İşleme":
+        return <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/30">{category}</Badge>;
+      case "Duygu Analizi":
+        return <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/30">{category}</Badge>;
+      case "Bilgisayarlı Görü":
+        return <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/30">{category}</Badge>;
+      case "Konuşma Tanıma":
+        return <Badge variant="outline" className="bg-yellow-500/10 text-yellow-400 border-yellow-500/30">{category}</Badge>;
       default:
-        return <Badge variant="outline">Diğer</Badge>;
+        return <Badge variant="outline">{category}</Badge>;
+    }
+  };
+
+  const getLicenseBadge = (license: string) => {
+    switch (license) {
+      case "MIT":
+        return <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/30">{license}</Badge>;
+      case "CC-BY-4.0":
+        return <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/30">{license}</Badge>;
+      case "Apache 2.0":
+        return <Badge variant="outline" className="bg-purple-500/10 text-purple-400 border-purple-500/30">{license}</Badge>;
+      case "CC-BY-NC-4.0":
+        return <Badge variant="outline" className="bg-yellow-500/10 text-yellow-400 border-yellow-500/30">{license}</Badge>;
+      default:
+        return <Badge variant="outline">{license}</Badge>;
     }
   };
 
@@ -103,66 +122,243 @@ const Datasets = () => {
 
           <div className="mb-8">
             <p className="text-white/80 text-lg">
-              AI modellerinizi eğitmek ve test etmek için kullanabileceğiniz çeşitli veri setleri. 
-              Tüm veri setleri KVKK ve GDPR uyumlu olup, araştırma ve geliştirme amaçlı kullanım için uygundur.
+              Yapay zeka modellerinizi eğitmek ve test etmek için Türkçe veri setleri. 
+              Bu veri setleri çeşitli yapay zeka uygulamaları için optimize edilmiştir.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {datasets.map((dataset) => (
-              <Card key={dataset.id} className="bg-black/30 border-white/10 transition-all hover:border-white/20 hover:bg-black/40">
-                <CardHeader>
-                  <div className="flex justify-between items-start mb-2">
-                    <div className="flex space-x-2">
-                      {getCategoryBadge(dataset.category)}
-                      {dataset.isNew && <Badge variant="warning">Yeni</Badge>}
-                    </div>
-                  </div>
-                  <CardTitle className="text-xl">{dataset.title}</CardTitle>
-                  <CardDescription>{dataset.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-col space-y-4">
-                    <div className="flex justify-between text-white/70 text-sm">
-                      <div className="flex items-center">
-                        <Database className="h-4 w-4 mr-2" />
-                        <span>{dataset.size}</span>
+          <Tabs defaultValue="all" className="mb-10">
+            <TabsList className="mb-6 bg-black/20">
+              <TabsTrigger value="all">Tüm Veri Setleri</TabsTrigger>
+              <TabsTrigger value="nlp">Doğal Dil İşleme</TabsTrigger>
+              <TabsTrigger value="vision">Bilgisayarlı Görü</TabsTrigger>
+              <TabsTrigger value="audio">Ses</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="all">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {datasets.map((dataset) => (
+                  <Card key={dataset.id} className="bg-black/30 border-white/10 transition-all hover:border-white/20 hover:bg-black/40">
+                    <CardHeader>
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="flex space-x-2">
+                          {getCategoryBadge(dataset.category)}
+                          {getLicenseBadge(dataset.license)}
+                        </div>
                       </div>
-                      <div className="flex items-center">
-                        <FileBarChart className="h-4 w-4 mr-2" />
-                        <span>{dataset.samples} örnek</span>
+                      <CardTitle className="text-xl">{dataset.title}</CardTitle>
+                      <CardDescription>{dataset.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-col space-y-4">
+                        <div className="grid grid-cols-2 gap-4 text-white/70 text-sm">
+                          <div className="flex items-center">
+                            <span className="font-medium mr-2">Boyut:</span>
+                            <span>{dataset.size}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <Download className="h-4 w-4 mr-2" />
+                            <span>{dataset.downloads}</span>
+                          </div>
+                        </div>
+                        <div className="text-white/70 text-sm">
+                          <span className="font-medium mr-2">Son Güncelleme:</span>
+                          <span>{dataset.lastUpdated}</span>
+                        </div>
+                        
+                        <Separator className="bg-white/10" />
+                        
+                        <div className="flex justify-between items-center">
+                          <a href={`/resources/datasets/${dataset.id}`} className="text-aihub-blue hover:underline">
+                            Detayları Görüntüle
+                          </a>
+                          <a 
+                            href={`/resources/datasets/${dataset.id}/download`}
+                            className="bg-aihub-blue text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+                          >
+                            İndir
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                    
-                    <Separator className="bg-white/10" />
-                    
-                    <a href={`/resources/datasets/${dataset.id}`} className="text-aihub-blue hover:underline flex justify-between items-center">
-                      <span>İncele ve İndir</span>
-                      <Download className="h-4 w-4" />
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="nlp">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {datasets.filter(d => d.category === "Doğal Dil İşleme" || d.category === "Duygu Analizi").map((dataset) => (
+                  <Card key={dataset.id} className="bg-black/30 border-white/10 transition-all hover:border-white/20 hover:bg-black/40">
+                    <CardHeader>
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="flex space-x-2">
+                          {getCategoryBadge(dataset.category)}
+                          {getLicenseBadge(dataset.license)}
+                        </div>
+                      </div>
+                      <CardTitle className="text-xl">{dataset.title}</CardTitle>
+                      <CardDescription>{dataset.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-col space-y-4">
+                        <div className="grid grid-cols-2 gap-4 text-white/70 text-sm">
+                          <div className="flex items-center">
+                            <span className="font-medium mr-2">Boyut:</span>
+                            <span>{dataset.size}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <Download className="h-4 w-4 mr-2" />
+                            <span>{dataset.downloads}</span>
+                          </div>
+                        </div>
+                        <div className="text-white/70 text-sm">
+                          <span className="font-medium mr-2">Son Güncelleme:</span>
+                          <span>{dataset.lastUpdated}</span>
+                        </div>
+                        
+                        <Separator className="bg-white/10" />
+                        
+                        <div className="flex justify-between items-center">
+                          <a href={`/resources/datasets/${dataset.id}`} className="text-aihub-blue hover:underline">
+                            Detayları Görüntüle
+                          </a>
+                          <a 
+                            href={`/resources/datasets/${dataset.id}/download`}
+                            className="bg-aihub-blue text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+                          >
+                            İndir
+                          </a>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="vision">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {datasets.filter(d => d.category === "Bilgisayarlı Görü").map((dataset) => (
+                  <Card key={dataset.id} className="bg-black/30 border-white/10 transition-all hover:border-white/20 hover:bg-black/40">
+                    <CardHeader>
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="flex space-x-2">
+                          {getCategoryBadge(dataset.category)}
+                          {getLicenseBadge(dataset.license)}
+                        </div>
+                      </div>
+                      <CardTitle className="text-xl">{dataset.title}</CardTitle>
+                      <CardDescription>{dataset.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-col space-y-4">
+                        <div className="grid grid-cols-2 gap-4 text-white/70 text-sm">
+                          <div className="flex items-center">
+                            <span className="font-medium mr-2">Boyut:</span>
+                            <span>{dataset.size}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <Download className="h-4 w-4 mr-2" />
+                            <span>{dataset.downloads}</span>
+                          </div>
+                        </div>
+                        <div className="text-white/70 text-sm">
+                          <span className="font-medium mr-2">Son Güncelleme:</span>
+                          <span>{dataset.lastUpdated}</span>
+                        </div>
+                        
+                        <Separator className="bg-white/10" />
+                        
+                        <div className="flex justify-between items-center">
+                          <a href={`/resources/datasets/${dataset.id}`} className="text-aihub-blue hover:underline">
+                            Detayları Görüntüle
+                          </a>
+                          <a 
+                            href={`/resources/datasets/${dataset.id}/download`}
+                            className="bg-aihub-blue text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+                          >
+                            İndir
+                          </a>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="audio">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {datasets.filter(d => d.category === "Konuşma Tanıma").map((dataset) => (
+                  <Card key={dataset.id} className="bg-black/30 border-white/10 transition-all hover:border-white/20 hover:bg-black/40">
+                    <CardHeader>
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="flex space-x-2">
+                          {getCategoryBadge(dataset.category)}
+                          {getLicenseBadge(dataset.license)}
+                        </div>
+                      </div>
+                      <CardTitle className="text-xl">{dataset.title}</CardTitle>
+                      <CardDescription>{dataset.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-col space-y-4">
+                        <div className="grid grid-cols-2 gap-4 text-white/70 text-sm">
+                          <div className="flex items-center">
+                            <span className="font-medium mr-2">Boyut:</span>
+                            <span>{dataset.size}</span>
+                          </div>
+                          <div className="flex items-center">
+                            <Download className="h-4 w-4 mr-2" />
+                            <span>{dataset.downloads}</span>
+                          </div>
+                        </div>
+                        <div className="text-white/70 text-sm">
+                          <span className="font-medium mr-2">Son Güncelleme:</span>
+                          <span>{dataset.lastUpdated}</span>
+                        </div>
+                        
+                        <Separator className="bg-white/10" />
+                        
+                        <div className="flex justify-between items-center">
+                          <a href={`/resources/datasets/${dataset.id}`} className="text-aihub-blue hover:underline">
+                            Detayları Görüntüle
+                          </a>
+                          <a 
+                            href={`/resources/datasets/${dataset.id}/download`}
+                            className="bg-aihub-blue text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors"
+                          >
+                            İndir
+                          </a>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
           
-          <div className="mt-10 p-6 bg-gradient-to-r from-indigo-900/20 to-indigo-700/10 rounded-lg border border-indigo-500/20">
+          <div className="mt-10 p-6 bg-gradient-to-r from-blue-900/20 to-purple-700/10 rounded-lg border border-blue-500/20">
             <div className="flex flex-col md:flex-row items-center">
               <div className="mb-4 md:mb-0 md:mr-6 flex-shrink-0">
-                <Database className="h-12 w-12 text-indigo-400" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-12 h-12 text-blue-400">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2">Özel Veri Seti mi Arıyorsunuz?</h3>
+                <h3 className="text-xl font-semibold mb-2">Kendi Veri Setinizi Paylaşın</h3>
                 <p className="text-white/80">
-                  İhtiyacınız olan özel bir veri seti varsa veya kendi veri setinizi platformumuzda paylaşmak isterseniz, 
-                  bizimle iletişime geçin. AIHUB360 veri bilimcileri size yardımcı olabilir.
+                  Oluşturduğunuz veya geliştirdiğiniz veri setlerini toplulukla paylaşarak yapay zeka 
+                  ekosisteminin gelişmesine katkıda bulunabilirsiniz. Veri setinizi göndermek için formu doldurun.
                 </p>
                 <div className="mt-4">
                   <a 
-                    href="/contact-data-team" 
-                    className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors inline-block"
+                    href="/resources/datasets/submit" 
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-md hover:opacity-90 transition-opacity inline-block"
                   >
-                    Veri Ekibiyle İletişime Geç
+                    Veri Seti Gönder
                   </a>
                 </div>
               </div>
