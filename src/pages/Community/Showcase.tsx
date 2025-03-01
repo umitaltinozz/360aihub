@@ -1,4 +1,3 @@
-
 import { 
   Card, 
   CardContent, 
@@ -193,7 +192,7 @@ const Showcase = () => {
                         <div className="flex space-x-2">
                           {getCategoryBadge(project.category)}
                           {project.isFeatured && (
-                            <Badge variant="gradient" className="flex items-center">
+                            <Badge variant="warning" className="flex items-center bg-blue-500/20 text-blue-400 border-blue-500/30">
                               <Award className="h-3 w-3 mr-1" />
                               Öne Çıkan
                             </Badge>
@@ -263,12 +262,11 @@ const Showcase = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {projects.filter(project => project.isFeatured).map((project) => (
                   <Card key={project.id} className="bg-black/30 border-white/10 transition-all hover:border-white/20 hover:bg-black/40 ring-1 ring-blue-500/50">
-                    {/* Same card content as above */}
                     <CardHeader>
                       <div className="flex justify-between items-start mb-2">
                         <div className="flex space-x-2">
                           {getCategoryBadge(project.category)}
-                          <Badge variant="gradient" className="flex items-center">
+                          <Badge variant="warning" className="flex items-center bg-blue-500/20 text-blue-400 border-blue-500/30">
                             <Award className="h-3 w-3 mr-1" />
                             Öne Çıkan
                           </Badge>
@@ -337,13 +335,12 @@ const Showcase = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {projects.sort((a, b) => b.likes - a.likes).slice(0, 3).map((project) => (
                   <Card key={project.id} className={`bg-black/30 border-white/10 transition-all hover:border-white/20 hover:bg-black/40 ${project.isFeatured ? 'ring-1 ring-blue-500/50' : ''}`}>
-                    {/* Same card content as above */}
                     <CardHeader>
                       <div className="flex justify-between items-start mb-2">
                         <div className="flex space-x-2">
                           {getCategoryBadge(project.category)}
                           {project.isFeatured && (
-                            <Badge variant="gradient" className="flex items-center">
+                            <Badge variant="warning" className="flex items-center bg-blue-500/20 text-blue-400 border-blue-500/30">
                               <Award className="h-3 w-3 mr-1" />
                               Öne Çıkan
                             </Badge>

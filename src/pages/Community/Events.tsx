@@ -1,4 +1,3 @@
-
 import { 
   Card, 
   CardContent, 
@@ -139,7 +138,7 @@ const Events = () => {
                       <div className="flex justify-between items-start mb-2">
                         <div className="flex space-x-2">
                           {getEventTypeBadge(event.type)}
-                          {event.isHighlighted && <Badge variant="gradient">Öne Çıkan</Badge>}
+                          {event.isHighlighted && <Badge variant="warning" className="bg-blue-500/20 text-blue-400 border-blue-500/30">Öne Çıkan</Badge>}
                         </div>
                       </div>
                       <CardTitle className="text-2xl">{event.title}</CardTitle>

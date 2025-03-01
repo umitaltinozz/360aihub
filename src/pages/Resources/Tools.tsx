@@ -6,7 +6,7 @@ import {
   CardHeader, 
   CardTitle 
 } from "@/components/ui/card";
-import { Search, Tool, ExternalLink, Star, Download } from "lucide-react";
+import { Search, Wrench, ExternalLink, Star, Download } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -121,7 +121,7 @@ const Tools = () => {
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex space-x-2">
                       {getCategoryBadge(tool.category)}
-                      {tool.isPopular && <Badge variant="gradient">Popüler</Badge>}
+                      {tool.isPopular && <Badge variant="warning">Popüler</Badge>}
                     </div>
                   </div>
                   <CardTitle className="text-xl">{tool.title}</CardTitle>
@@ -155,7 +155,7 @@ const Tools = () => {
           <div className="mt-10 p-6 bg-gradient-to-r from-blue-900/20 to-purple-700/10 rounded-lg border border-blue-500/20">
             <div className="flex flex-col md:flex-row items-center">
               <div className="mb-4 md:mb-0 md:mr-6 flex-shrink-0">
-                <Tool className="h-12 w-12 text-blue-400" />
+                <Wrench className="h-12 w-12 text-blue-400" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold mb-2">Kendi Aracınızı Geliştirin</h3>
