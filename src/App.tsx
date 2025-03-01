@@ -64,6 +64,20 @@ import UserReports from "@/pages/Admin/UserReports";
 import SalesReports from "@/pages/Admin/SalesReports";
 import AdminNotifications from "@/pages/Admin/AdminNotifications";
 
+// Yeni Eğitim ve Topluluk Sayfaları
+import Documentation from "@/pages/Education/Documentation";
+import Tutorials from "@/pages/Education/Tutorials";
+import Webinars from "@/pages/Education/Webinars";
+import Courses from "@/pages/Education/Courses";
+import Guides from "@/pages/Resources/Guides";
+import Templates from "@/pages/Resources/Templates";
+import Datasets from "@/pages/Resources/Datasets";
+import Tools from "@/pages/Resources/Tools";
+import Forum from "@/pages/Community/Forum";
+import Events from "@/pages/Community/Events";
+import Showcase from "@/pages/Community/Showcase";
+import Contribute from "@/pages/Community/Contribute";
+
 import { Toaster } from "@/components/ui/toaster";
 import "./App.css";
 
@@ -115,6 +129,22 @@ function App() {
         <Route path="/subscription/payment" element={<PaymentPage />} />
         <Route path="/subscription/manage" element={<ManageSubscription />} />
         <Route path="/subscription/billing" element={<BillingHistory />} />
+        
+        {/* Eğitim ve Kaynaklar */}
+        <Route path="/docs" element={<Documentation />} />
+        <Route path="/tutorials" element={<Tutorials />} />
+        <Route path="/webinars" element={<Webinars />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/resources/guides" element={<Guides />} />
+        <Route path="/resources/templates" element={<Templates />} />
+        <Route path="/resources/datasets" element={<Datasets />} />
+        <Route path="/resources/tools" element={<Tools />} />
+        
+        {/* Topluluk */}
+        <Route path="/community/forum" element={<Forum />} />
+        <Route path="/community/events" element={<Events />} />
+        <Route path="/community/showcase" element={<Showcase />} />
+        <Route path="/community/contribute" element={<Contribute />} />
         
         {/* Admin Panel */}
         <Route path="/admin" element={<AdminLayout />}>
