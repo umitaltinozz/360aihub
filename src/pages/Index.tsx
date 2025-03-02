@@ -19,10 +19,10 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const Index = () => {
-  const [activeCategory, setActiveCategory] = useState("Tümü");
+  const [selectedCategory, setSelectedCategory] = useState("Tümü");
   
   const handleCategoryChange = (category: string) => {
-    setActiveCategory(category);
+    setSelectedCategory(category);
   };
   
   return (
@@ -100,7 +100,7 @@ const Index = () => {
             
             <CategoryFilter 
               categories={["Tümü", "AI Modelleri", "Araştırmalar", "Şirket Haberleri", "Etik", "Uygulamalar"]} 
-              activeCategory={activeCategory}
+              selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryChange}
             />
             
@@ -297,3 +297,4 @@ const Index = () => {
 };
 
 export default Index;
+

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Search, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -88,7 +87,7 @@ const allNews = [
     id: "7",
     title: "Açık Kaynak AI Projeleri Global Benimsenmede Artış Gösteriyor",
     excerpt: "Açık kaynaklı yapay zeka modelleri ve araçları, özellikle küçük işletmeler ve akademik kurumlar arasında hızla yaygınlaşıyor.",
-    content: "Açık kaynaklı yapay zeka modelleri ve frameworkleri, son bir yılda %300'den fazla artışla benimseniyor. Özellikle Meta'nın LLaMA, Stability AI'ın Stable Diffusion ve EleutherAI'ın Pythia gibi açık kaynaklı modelleri, AI teknolojilerine demokratik erişim sağlıyor.\n\nBu modeller özellikle küçük işletmeler, startuplar ve akademik kurumlar için önemli fırsatlar sunuyor. Büyük teknoloji şirketlerinin pahalı API'lerine bağımlı olmadan, kendi AI çözümlerini geliştirebiliyorlar.\n\nAçık kaynaklı ekosistem ayrıca, yerel dillerde ve özel alanlarda eğitilmiş modellerin geliştirilmesini de hızlandırıyor. Bu sayede, daha önce erişilemeyen dil ve kültür grupları için de AI çözümleri mümkün hale geliyor.\n\nAncak uzmanlar, açık kaynak modellerin güvenlik ve etik kullanım konularında bazı endişeleri de beraberinde getirdiğini belirtiyorlar. Kötü amaçlı kullanımlara karşı topluluk standartları ve güvenlik önlemleri geliştirilmesi gerektiği vurgulanıyor.",
+    content: "Açık kaynaklı yapay zeka modelleri ve frameworkleri, son bir yılda %300'den fazla artışla benimseniyor. Özellikle Meta'nın LLaMA, Stability AI'ın Stable Diffusion ve EleutherAI'ın Pythia gibi açık kaynaklı modelleri, AI teknolojilerine demokratik erişim sağlıyor.\n\nBu modeller özellikle küçük işletmeler, startuplar ve akademik kurumlar için önemli fırsatlar sunuyor. Büyük teknoloji şirketlerinin pahalı API'lerine bağımlı olmadan, kendi AI çözümlerini geliştirebiliyorlar حفاظتی.\n\nAçık kaynaklı ekosistem ayrıca, yerel dillerde ve özel alanlarda eğitilmiş modellerin geliştirilmesini de hızlandırıyor. Bu sayede, daha önce erişilemeyen dil ve kültür grupları için de AI çözümleri mümkün hale geliyor.\n\nAncak uzmanlar, açık kaynak modellerin güvenlik ve etik kullanım konularında bazı endişeleri de beraberinde getirdiğini belirtiyorlar. Kötü amaçlı kullanımlara karşı topluluk standartları ve güvenlik önlemleri geliştirilmesi gerektiği vurgulanıyor.",
     category: "Açık Kaynak",
     imageUrl: "https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     publishedAt: "2023-10-03T12:45:00Z",
@@ -117,7 +116,7 @@ const AINews = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeCategory, setActiveCategory] = useState("Tümü");
+  const [selectedCategory, setSelectedCategory] = useState("Tümü");
   const [showFilters, setShowFilters] = useState(false);
   const [sortBy, setSortBy] = useState("latest"); // latest, oldest
   const [news, setNews] = useState(allNews);
@@ -146,8 +145,8 @@ const AINews = () => {
     }
     
     // Filter by category
-    if (activeCategory !== "Tümü") {
-      filtered = filtered.filter(item => item.category === activeCategory);
+    if (selectedCategory !== "Tümü") {
+      filtered = filtered.filter(item => item.category === selectedCategory);
     }
     
     // Sort news
@@ -158,10 +157,10 @@ const AINews = () => {
     }
     
     setNews(filtered);
-  }, [searchTerm, activeCategory, sortBy]);
+  }, [searchTerm, selectedCategory, sortBy]);
 
   const handleCategoryChange = (category: string) => {
-    setActiveCategory(category);
+    setSelectedCategory(category);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -258,7 +257,7 @@ const AINews = () => {
                     size="sm"
                     onClick={() => {
                       setSearchTerm("");
-                      setActiveCategory("Tümü");
+                      setSelectedCategory("Tümü");
                       setSortBy("latest");
                     }}
                     className="text-white/70 hover:text-white"
@@ -276,7 +275,7 @@ const AINews = () => {
           <div className="max-w-7xl mx-auto">
             <CategoryFilter 
               categories={categories}
-              activeCategory={activeCategory}
+              selectedCategory={selectedCategory}
               onCategoryChange={handleCategoryChange}
             />
           </div>
@@ -313,7 +312,7 @@ const AINews = () => {
                   className="border-white/10 hover:bg-white/5"
                   onClick={() => {
                     setSearchTerm("");
-                    setActiveCategory("Tümü");
+                    setSelectedCategory("Tümü");
                   }}
                 >
                   Filtreleri Temizle
