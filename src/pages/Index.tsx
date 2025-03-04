@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import Hero from "@/components/Hero";
 import CustomNavbar from "@/components/CustomNavbar";
@@ -6,27 +5,15 @@ import QuickAccessCard from "@/components/QuickAccessCard";
 import CategoryFilter from "@/components/CategoryFilter";
 import NewsCard from "@/components/NewsCard";
 import Footer from "@/components/Footer";
-import { 
-  ArrowRight, 
-  ChevronRight, 
-  Sparkles, 
-  BookOpen, 
-  Zap, 
-  ShieldCheck, 
-  Users 
-} from "lucide-react";
+import { ArrowRight, ChevronRight, Sparkles, BookOpen, Zap, ShieldCheck, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-
 const Index = () => {
   const [selectedCategory, setSelectedCategory] = useState("Tümü");
-  
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
   };
-  
-  return (
-    <div className="min-h-screen flex flex-col bg-aihub-dark">
+  return <div className="min-h-screen flex flex-col bg-aihub-dark">
       <CustomNavbar />
       
       <main className="flex-grow">
@@ -38,7 +25,7 @@ const Index = () => {
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10">
               <div>
-                <h2 className="text-3xl font-bold mb-2">Hızlı Erişim</h2>
+                <h2 className="text-3xl font-bold mb-2 text-zinc-400">Hızlı Erişim</h2>
                 <p className="text-white/70">En popüler hizmet ve kaynaklara kolayca erişin.</p>
               </div>
               <Link to="/ai-models">
@@ -50,34 +37,10 @@ const Index = () => {
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              <QuickAccessCard 
-                title="AI Modelleri" 
-                description="En gelişmiş yapay zeka modellerini keşfedin."
-                link="/ai-models"
-                icon={Sparkles}
-                color="blue"
-              />
-              <QuickAccessCard 
-                title="AI Eğitimleri" 
-                description="Yapay zeka ile ilgili kapsamlı eğitimler."
-                link="/training"
-                icon={BookOpen}
-                color="purple"
-              />
-              <QuickAccessCard 
-                title="Marketplace" 
-                description="AI araçları ve hazır çözümler için pazar yeri."
-                link="/marketplace"
-                icon={Zap}
-                color="green"
-              />
-              <QuickAccessCard 
-                title="Admin Paneli" 
-                description="Yönetici arayüzüne erişim sağlayın."
-                link="/admin"
-                icon={ShieldCheck}
-                color="orange"
-              />
+              <QuickAccessCard title="AI Modelleri" description="En gelişmiş yapay zeka modellerini keşfedin." link="/ai-models" icon={Sparkles} color="blue" />
+              <QuickAccessCard title="AI Eğitimleri" description="Yapay zeka ile ilgili kapsamlı eğitimler." link="/training" icon={BookOpen} color="purple" />
+              <QuickAccessCard title="Marketplace" description="AI araçları ve hazır çözümler için pazar yeri." link="/marketplace" icon={Zap} color="green" />
+              <QuickAccessCard title="Admin Paneli" description="Yönetici arayüzüne erişim sağlayın." link="/admin" icon={ShieldCheck} color="orange" />
             </div>
           </div>
         </section>
@@ -98,37 +61,12 @@ const Index = () => {
               </Link>
             </div>
             
-            <CategoryFilter 
-              categories={["Tümü", "AI Modelleri", "Araştırmalar", "Şirket Haberleri", "Etik", "Uygulamalar"]} 
-              selectedCategory={selectedCategory}
-              onCategoryChange={handleCategoryChange}
-            />
+            <CategoryFilter categories={["Tümü", "AI Modelleri", "Araştırmalar", "Şirket Haberleri", "Etik", "Uygulamalar"]} selectedCategory={selectedCategory} onCategoryChange={handleCategoryChange} />
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-              <NewsCard 
-                id="1"
-                title="OpenAI GPT-5 Modelini Duyurdu: 'Düşünme Yetenekleri Geliştirildi'"
-                excerpt="OpenAI, merakla beklenen GPT-5 modelini duyurdu. Yeni model, önceki sürümlere göre geliştirilmiş düşünme yetenekleri ve muhakeme..."
-                imageUrl="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWklMjBicmFpbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60"
-                category="AI Modelleri"
-                publishedAt="2024-06-15"
-              />
-              <NewsCard 
-                id="2"
-                title="Google, Yeni Gemini 2.0 Modelini Tanıttı: 'Multimodal Kabiliyetler Artırıldı'"
-                excerpt="Google, merakla beklenen Gemini 2.0 modelini tanıttı. Yeni model, metin, görsel ve ses verilerini daha etkili bir şekilde anlayabiliyor..."
-                imageUrl="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YWklMjB0ZWNofGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
-                category="AI Modelleri"
-                publishedAt="2024-06-12"
-              />
-              <NewsCard 
-                id="3"
-                title="AB'den Yapay Zeka Düzenlemeleri: Yeni AI Yasası Yürürlüğe Girdi"
-                excerpt="Avrupa Birliği'nin kapsamlı yapay zeka düzenlemesi olan AI Act resmen yürürlüğe girdi. Yasa, yapay zeka sistemlerini risk seviyelerine göre sınıflandırıyor..."
-                imageUrl="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGV1cm9wZWFuJTIwdW5pb258ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
-                category="Etik"
-                publishedAt="2024-06-10"
-              />
+              <NewsCard id="1" title="OpenAI GPT-5 Modelini Duyurdu: 'Düşünme Yetenekleri Geliştirildi'" excerpt="OpenAI, merakla beklenen GPT-5 modelini duyurdu. Yeni model, önceki sürümlere göre geliştirilmiş düşünme yetenekleri ve muhakeme..." imageUrl="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YWklMjBicmFpbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60" category="AI Modelleri" publishedAt="2024-06-15" />
+              <NewsCard id="2" title="Google, Yeni Gemini 2.0 Modelini Tanıttı: 'Multimodal Kabiliyetler Artırıldı'" excerpt="Google, merakla beklenen Gemini 2.0 modelini tanıttı. Yeni model, metin, görsel ve ses verilerini daha etkili bir şekilde anlayabiliyor..." imageUrl="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YWklMjB0ZWNofGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60" category="AI Modelleri" publishedAt="2024-06-12" />
+              <NewsCard id="3" title="AB'den Yapay Zeka Düzenlemeleri: Yeni AI Yasası Yürürlüğe Girdi" excerpt="Avrupa Birliği'nin kapsamlı yapay zeka düzenlemesi olan AI Act resmen yürürlüğe girdi. Yasa, yapay zeka sistemlerini risk seviyelerine göre sınıflandırıyor..." imageUrl="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGV1cm9wZWFuJTIwdW5pb258ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60" category="Etik" publishedAt="2024-06-10" />
             </div>
             
             <div className="mt-12 text-center">
@@ -161,11 +99,7 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="glass rounded-xl overflow-hidden card-hover">
                 <div className="relative h-40 overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                    alt="OpenAI GPT-4"
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
+                  <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="OpenAI GPT-4" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
                   <div className="absolute top-0 right-0 m-2">
                     <div className="bg-aihub-blue text-white text-xs font-semibold px-2 py-1 rounded-full">
                       Popüler
@@ -190,11 +124,7 @@ const Index = () => {
               
               <div className="glass rounded-xl overflow-hidden card-hover">
                 <div className="relative h-40 overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                    alt="Claude 3 Opus"
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
+                  <img src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Claude 3 Opus" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
                 </div>
                 <div className="p-4">
                   <h3 className="text-xl font-semibold mb-1">Claude 3 Opus</h3>
@@ -214,11 +144,7 @@ const Index = () => {
               
               <div className="glass rounded-xl overflow-hidden card-hover">
                 <div className="relative h-40 overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1579403124614-197f69d8187b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                    alt="Stable Diffusion XL"
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
+                  <img src="https://images.unsplash.com/photo-1579403124614-197f69d8187b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Stable Diffusion XL" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
                   <div className="absolute top-2 left-2">
                     <div className="bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
                       Ücretsiz
@@ -292,9 +218,6 @@ const Index = () => {
       </main>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
-
